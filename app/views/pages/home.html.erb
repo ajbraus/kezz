@@ -1,0 +1,17 @@
+<h1> Welcome, <%= current_user.first_name %><h1>
+<% if @libraries.empty? %>
+	<h2>Whoomp! Whoomp! You have no libraries</h2>
+<% else %>
+	<h2>Here are your delightful libraries</h2>
+	<% @libraries.each do |l| %>
+	  <li><%= l.name %></li>
+	  <li><%= l.description %></li>
+	  <li><%= l.creator %></li>
+	  <li><%= link_to 'Show', l %></li>
+	  <li><%= link_to 'Edit', edit_library_path(l) %></li>
+	  <li><%= link_to 'Destroy', l, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+	<% end %>
+
+<% end %>
+
+<%= link_to  "Create New Library", new_library_path %>

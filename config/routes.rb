@@ -1,4 +1,25 @@
 Kezz::Application.routes.draw do
+
+  resources :tests
+
+  devise_for :users do  
+    resources :libraries
+  end
+
+  resources :libraries do
+    resources :readings
+  end
+
+  match '/about', :to => 'pages#about', :as => "about"
+  match '/contact', :to => 'pages#contact', :as => "contact"
+  match '/home', to: 'pages#home', as: "home"
+
+
+  authenticated :user do
+    root :to => 'pages#home'
+  end
+
+  root :to => 'pages#landing'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +69,7 @@ Kezz::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+
 
   # See how all your routes lay out with "rake routes"
 
