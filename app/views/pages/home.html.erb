@@ -4,14 +4,25 @@
 <% else %>
 	<h2>Here are your delightful libraries</h2>
 	<% @libraries.each do |l| %>
-	  <li><%= l.name %></li>
-	  <li><%= l.description %></li>
-	  <li><%= l.creator %></li>
+<p>
+  <b>Name:</b>
+  <%= l.name %>
+</p>
+<p>
+  <b>Creator:</b>
+  <%= l.creator.name %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= l.description %>
+</p>
+	<ul>
 	  <li><%= link_to 'Show', l %></li>
 	  <li><%= link_to 'Edit', edit_library_path(l) %></li>
 	  <li><%= link_to 'Destroy', l, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+	</ul>
 	<% end %>
 
 <% end %>
 
-<%= link_to  "Create New Library", new_library_path %>
+<%= link_to  "Create New Library", new_library_path, class: "btn" %>

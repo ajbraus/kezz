@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731003246) do
+ActiveRecord::Schema.define(:version => 20120830034953) do
 
   create_table "libraries", :force => true do |t|
     t.string   "name"
@@ -23,18 +23,48 @@ ActiveRecord::Schema.define(:version => 20120731003246) do
 
   add_index "libraries", ["user_id"], :name => "index_libraries_on_user_id"
 
+  create_table "paragraphs", :force => true do |t|
+    t.integer  "position"
+    t.integer  "reading_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "paragraphs", ["reading_id"], :name => "index_paragraphs_on_reading_id"
+
+  create_table "phrases", :force => true do |t|
+    t.integer  "position"
+    t.integer  "reading_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "phrases", ["reading_id"], :name => "index_phrases_on_reading_id"
+
   create_table "readings", :force => true do |t|
     t.string   "title"
     t.string   "content"
     t.string   "author"
     t.string   "summary"
     t.integer  "rating"
+    t.boolean  "sentancely"
+    t.boolean  "phrasely"
+    t.boolean  "paragraphly"
     t.integer  "library_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "readings", ["library_id"], :name => "index_readings_on_library_id"
+
+  create_table "sentances", :force => true do |t|
+    t.integer  "position"
+    t.integer  "reading_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "readings", ["library_id"], :name => "index_readings_on_library_id"
+  add_index "sentances", ["reading_id"], :name => "index_sentances_on_reading_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -31,8 +31,9 @@ class ReadingsController < ApplicationController
   # POST /readings
   # POST /readings.json
   def create
-    @library = Library.find(params[:id])
-    @reading = @library.readings.new
+    @library = Library.find(params[:library_id])
+    @reading = @library.readings.new(params[:reading])
+    @reading = @reading.create_reading
 
     respond_to do |format|
       if @reading.save

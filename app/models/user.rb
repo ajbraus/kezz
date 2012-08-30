@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
 
 
-   def first_name
+  def first_name
     name.split(' ')[0]
   end
 

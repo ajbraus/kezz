@@ -6,12 +6,13 @@
 </p>
 
 <p>
-  <b>Content:</b>
-  <%= @reading.content %>
+  <b>Library:</b>
+  <%= @reading.library.name %>
 </p>
 
 <p>
-  <b>Author:</b>
+
+<b>Author:</b>
   <%= @reading.author %>
 </p>
 
@@ -21,15 +22,16 @@
 </p>
 
 <p>
+  <%= @reading.content %>
+</p>
+
+<p>
   <b>Rating:</b>
   <%= @reading.rating %>
 </p>
 
-<p>
-  <b>Library:</b>
-  <%= @reading.library %>
-</p>
+<% if current_user.id == @reading.library.user_id %>
+  <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
+<% end %>
 
-
-<%= link_to 'Edit', edit_reading_path(@reading) %> |
-<%= link_to 'Back', readings_path %>
+<%= link_to 'Back', library_readings_path %>

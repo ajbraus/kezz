@@ -6,6 +6,9 @@ class CreateReadings < ActiveRecord::Migration
       t.string :author
       t.string :summary
       t.integer :rating
+      t.boolean :sentancely
+      t.boolean :phrasely
+      t.boolean :paragraphly
       t.references :library
 
       t.timestamps

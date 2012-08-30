@@ -1,13 +1,9 @@
 Kezz::Application.routes.draw do
 
-  resources :tests
-
   devise_for :users do  
-    resources :libraries
-  end
-
-  resources :libraries do
-    resources :readings
+    resources :libraries do
+      resources :readings
+    end
   end
 
   match '/about', :to => 'pages#about', :as => "about"

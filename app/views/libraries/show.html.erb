@@ -12,21 +12,17 @@
   <%= @library.description %>
 </p>
 <% if @readings.empty? %>
-	<h2>Whoomp! Whoomp! You have no Readings, why not create one?</h2>
+	<h2>Whoomp! Whoomp! You have no Readings</h2>
 <% else %>
 	<h2>Here are your delightful Readings</h2>
 	<% @readings.each do |r| %>
-	  <ul>
-		  <li><%= r.title %></li>
-		  <li><%= r.summary %></li>
-		  <li><%= link_to 'Show', r %></li>
-		  <li><%= link_to 'Edit', edit_library_reading_path(r) %></li>
-		  <li><%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-	  </ul>
+		<ul>
+			<li><%= link_to "#{r.title.capitalize}", library_reading_path(r) %>
+		</ul>
 	<% end %>
 <% end %>
 
-<p><%= link_to "Create New Reading", new_library_reading_path(@library, @reading) %></p>
+<p><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn" %></p>
 
 <%= link_to 'Edit', edit_library_path(@library) %> |
 <%= link_to 'Back', libraries_path %>
