@@ -1,15 +1,15 @@
 class CreateReadings < ActiveRecord::Migration
   def change
     create_table :readings do |t|
-      t.string :title
-      t.string :content
+      t.string :title, null: false
+      t.text :content, null: false
       t.string :author
       t.string :summary
       t.integer :rating
       t.boolean :sentancely
       t.boolean :phrasely
       t.boolean :paragraphly
-      t.references :library
+      t.references :library, null: false
 
       t.timestamps
     end

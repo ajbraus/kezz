@@ -1,6 +1,6 @@
 class Phrase < ActiveRecord::Base
-  belongs_to :reading
-  attr_accessible :position
+  belongs_to :sentance
+  attr_accessible :position, :text
 
-  acts_as_list scope: :reading
+  acts_as_list scope: :sentance
 end

@@ -11,15 +11,16 @@
   <b>Description:</b>
   <%= @library.description %>
 </p>
-<% if @readings.empty? %>
-	<h2>Whoomp! Whoomp! You have no Readings</h2>
-<% else %>
+<% if @readings %>
 	<h2>Here are your delightful Readings</h2>
 	<% @readings.each do |r| %>
 		<ul>
 			<li><%= link_to "#{r.title.capitalize}", library_reading_path(r) %>
 		</ul>
 	<% end %>
+
+<% else %>
+	<h2>Whoomp! Whoomp! You have no Readings</h2>
 <% end %>
 
 <p><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn" %></p>

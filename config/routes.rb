@@ -10,12 +10,8 @@ Kezz::Application.routes.draw do
   match '/contact', :to => 'pages#contact', :as => "contact"
   match '/home', to: 'pages#home', as: "home"
 
-
-  authenticated :user do
-    root :to => 'pages#home'
-  end
-
-  root :to => 'pages#landing'
+  root :to => 'pages#home'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

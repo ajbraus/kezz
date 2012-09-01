@@ -1,41 +1,89 @@
 class Reading < ActiveRecord::Base
   belongs_to :library
-  has_many :paragraphs
-  has_many :sentances
-  has_many :phrases
+  has_many :paragraphs, dependent: :destroy
   
-  attr_accessible :author, :content, :rating, :summary, :title
+  attr_accessible :author, 
+  								:content, 
+  								:rating, 
+  								:summary, 
+  								:title, 
+  								:paragraphly, 
+  								:sentancely,
+  								:phrasely
 
   validates :author, :content, :title, presence: true
 
+  validate :at_least_one
 
-  def create_reading(reading)
-  	if reading.phrasely?
-  		reading.content.split(/\,|\;|but|for|and|nor|or|yet|so|\(/) #split on commas, semicolons, and coordinating conjunctions
+	def at_least_one
+	  if %w(paragraphly sentancely phrasely).all?{|attr| self[attr].blank?}
+	    errors.add(:base, "message")
+	  end
+	end
 
-  		# not splitting on dashes (something to do with Unicode blah blah blah)
-  		# what the fuck to do with oxfor commas!?
-  	end
-
-  	if reading.sentancely?
-  		reading.content.split(/.\|\?/) #split on periods
+  def reading_puzzle(reading)
+    reading.paragraphs.each do |p|
+      if reading.paragraphly
+        scramble(p)
+      else
+        p.sentances.each do |s|
+          if reading.sentancely
+            scramble(s)
+          else
+            s.phrases.each do |ph|
+              if reading.phrasely
+                scramble(ph)
+              end
+            end
+          end
+        end
+      end
     end
-    
-    if reading.paragraphly?
-    	reading.content.split(/\n|\s/) #split on new line
-    end
-
-    #save in db as this cut up array
-    #readings#show
-    #add randomly id'ed html elements to it to identify its parts
-    #log the array of random ids
-    #jumble it up and display this in the view
-    #coffee script and jquery to drag and drop
-    
-    #@reading_sentancely.collect { |rs| } #attach html tags to array elements
-    #a.concat(a2) will concatinate two arrays together    
-
-                                
   end
 
+  def reading_puzzle(reading)
+    if reading.paragraphly
+      reading.paragraphs.scramble
+    elsif reading.sentancely
+      reading.paragraphs.sentances.scramble
+    elsif reading.phrasely
+      reading.paragraphs.sentances.phrases.scramble
+    elsif reading.paragraphly && reading.sentancely
+      reading.scramble_p_and_s(reading)
+    elsif reading.paragraphly && reading.phrasely
+      reading.scramble_p_and_ph(reading)
+    elsif reading.sentancely && reading.phrasely
+      reading.scramble_s_and_ph(reading)
+    end
+  end
+
+  def scramble_p_and_s(r)
+    r.paragraphs.scramble.each do |p|
+      p.sentances.scramble
+    end
+  end
+
+  def scramble_p_and_ph(r)
+    r.paragraphs.scramble.each do |p|
+      p.sentances.phrases.scramble
+    end
+  end
+
+  def scramble_s_and_ph(r)
+    r.paragraphs.each do |p|
+      p.sentances.scramble.each do |s|
+        s.phrases.scramble
+      end
+    end
+  end
+
+  def scramble
+    #take each element provided and fuck up its position
+    #when do I log its real position? - upon create duh! 
+    #so if I just compare ids to a range => 0..reading.paragraphs.count
+  end
+
+    # count how many elements and save that as a range in the session
+
+    # scramble those element
 end

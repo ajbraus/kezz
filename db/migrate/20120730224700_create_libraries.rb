@@ -1,9 +1,9 @@
 class CreateLibraries < ActiveRecord::Migration
   def change
     create_table :libraries do |t|
-      t.string :name
+      t.string :name, null: false
       t.string :description
-      t.references :user
+      t.references :user, null: false
 
       t.timestamps
     end

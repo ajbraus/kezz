@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
 	before_filter :authenticate_user!, except: [:home]
-	def landing
-	end
 
 	def home
-		@libraries = current_user.libraries
+		if user_signed_in?
+			@libraries = current_user.libraries
+		end	
 	end
 
 	def about

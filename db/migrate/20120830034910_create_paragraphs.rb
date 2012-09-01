@@ -1,8 +1,8 @@
 class CreateParagraphs < ActiveRecord::Migration
   def change
     create_table :paragraphs do |t|
-      t.integer :position
-      t.references :reading
+      t.integer 		:position
+      t.references 	:reading, null: false
 
       t.timestamps
     end

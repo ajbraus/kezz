@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(:version => 20120830034953) do
 
   create_table "libraries", :force => true do |t|
-    t.string   "name"
+    t.string   "name",        :null => false
     t.string   "description"
-    t.integer  "user_id"
+    t.integer  "user_id",     :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
 
   create_table "paragraphs", :force => true do |t|
     t.integer  "position"
-    t.integer  "reading_id"
+    t.integer  "reading_id", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -33,24 +33,25 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
   add_index "paragraphs", ["reading_id"], :name => "index_paragraphs_on_reading_id"
 
   create_table "phrases", :force => true do |t|
+    t.string   "text",        :null => false
     t.integer  "position"
-    t.integer  "reading_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "sentance_id", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "phrases", ["reading_id"], :name => "index_phrases_on_reading_id"
+  add_index "phrases", ["sentance_id"], :name => "index_phrases_on_sentance_id"
 
   create_table "readings", :force => true do |t|
-    t.string   "title"
-    t.string   "content"
+    t.string   "title",       :null => false
+    t.text     "content",     :null => false
     t.string   "author"
     t.string   "summary"
     t.integer  "rating"
     t.boolean  "sentancely"
     t.boolean  "phrasely"
     t.boolean  "paragraphly"
-    t.integer  "library_id"
+    t.integer  "library_id",  :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -59,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
 
   create_table "sentances", :force => true do |t|
     t.integer  "position"
-    t.integer  "reading_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "paragraph_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
-  add_index "sentances", ["reading_id"], :name => "index_sentances_on_reading_id"
+  add_index "sentances", ["paragraph_id"], :name => "index_sentances_on_paragraph_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -77,9 +78,9 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "name"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
