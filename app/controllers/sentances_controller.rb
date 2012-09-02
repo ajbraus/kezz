@@ -1,5 +1,9 @@
 class SentancesController < ApplicationController
-	
+
+	def index
+  	@sentances = Sentance.all(:order => &rsquo;position&rsquo;)
+	end
+
 	def destroy
 		@reading = Reading.find(params[:reading_id])
     @paragraph = @reading.paragraphs.find(params[:id])

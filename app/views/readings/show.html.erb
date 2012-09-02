@@ -21,60 +21,32 @@
   <%= @reading.summary %>
 </p>
 
-<p>
-
-  <!-- @reading is always an array of pargarphs with arrays of sentances within with arrays of phrases within. Depending on if it is ply,sly,phly each array is either out of order and drag/droppable or is in the correct order and not drag/droppable 
-
-    The cat was on the mat, and it liked the mat. Moreover, it enjoyed working so much it worked all day.
-       The problem was it was a cat.
-
-    [
-      [[[The cat was on the mat,][and it liked the mat.]][[Moreover,],[it enjoyed working so much it worked all day]]][The problem was it was a cat.]
-    ]
-    -->
-
-    <!-- paragraphly -->
-  <% @paragraphly.paragraphs.each do |p| %>
-    <p id="paragraph_<%= p.id %>"><%= p.sentances.phrases %></p>
-  <% end %>
-    <!-- sentancely -->
-  <% @sentancely.paragraphs.each do |p| %>
-    <% p.sentances do |s| %>
-      <span><%= s.phrases %></span>
-    <% end %>
-  <% end %>
-    <!-- phrasely -->
-  <% @phrasely.paragraphs.each do |p| %>
-    <% p.sentances do |s| %>
-      <% s.phrases do |ph| %>
-        <span id="phrase_<%= ph.id %>"<%= put ph %></span>
+<section>
+  <% @reading_puzzle.each do |p| %>
+    <p id="paragraph_<%= p.id %>"><span class="handle">[P]</span>
+    <% p.sentances.each do |s| %>
+      <span id="sentance_<%= s.id %>"><span class="handle">[S]</span>
+      <% s.phrases.each do |ph| %>
+        <span id="phrase_<%= ph.id %>">
+          <span class="handle">[Ph]</span>
+          <%= ph.text %>
+        </span>
       <% end %>
+      </span>
     <% end %>
+    </p>
   <% end %>
-    <!-- paragraphly & sentancely -->
-  <% @p_and_s.paragraphs.each do |p| %>
-    <% p.sentances do |s| %>
-      <span><%= s.phrases %></span>
-    <% end %>
-  <% end %>
-    <!-- paragraphly & phrasely  -->  
-  <% @p_and_ph.paragraphs.each do |p| %>
-    <% p.sentances do |s| %>
-      <% s.phrases do |ph| %>
-        <span id="phrase_<%= ph.id %>"<%= put ph %></span>
-      <% end %>
-    <% end %>
-  <% end %>
-    <!-- sentancely & phrasely -->
-  <% @phrasely.paragraphs.each do |p| %>
-    <% p.sentances do |s| %>
-      <% s.phrases do |ph| %>
-        <span id="phrase_<%= ph.id %>"<%= put ph %></span>
-      <% end %>
-    <% end %>
-  <% end %>
+</section>
 
-</p>
+
+            <% if false %>
+            <%= sortable_element('phrases', :url => 'sort_phrases_path') %>
+          </span>
+          <%= sortable_element('sentances', :url => 'sort_sentances_path') %>
+        </p>
+        <%= sortable_element('paragraphs', :url => 'sort_paragraphs_path') %>
+            <% end %>
+
 
 <p>
   <b>Rating:</b>
@@ -87,11 +59,3 @@
 
 <%= link_to 'Back', library_readings_path %>
 
-
-
-    <% p.sentance.each do |s| %></p>
-      <% s.phrase.each do |ph| %>
-        <span id="phrase_<%= ph.id %>">
-      <% end %> 
-    <% end %>
-  <% end %>

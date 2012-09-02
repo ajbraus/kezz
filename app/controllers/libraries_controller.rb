@@ -15,6 +15,7 @@ class LibrariesController < ApplicationController
   def show
     @library = Library.find(params[:id])
     @readings = @library.readings
+    binding.pry
 
     respond_to do |format|
       format.html # show.html.erb

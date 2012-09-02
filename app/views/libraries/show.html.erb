@@ -15,7 +15,7 @@
 	<h2>Here are your delightful Readings</h2>
 	<% @readings.each do |r| %>
 		<ul>
-			<li><%= link_to "#{r.title.capitalize}", library_reading_path(r) %>
+			<li><%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
 		</ul>
 	<% end %>
 

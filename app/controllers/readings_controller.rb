@@ -4,8 +4,23 @@ class ReadingsController < ApplicationController
   # GET /readings/1.json
   def show
     @reading = Reading.find(params[:id])
+    @reading_puzzle = @reading.paragraphs
 
-    @reading_puzzle = reading_puzzle(@reading)
+    # if @reading.paragraphly == true && @reading.sentancely == false && @reading.phrasely == false
+    #   @reading_puzzle = @reading.paragraphs.shuffle 
+    # elsif @reading.sentancely && @reading.paragraphly == false && @reading.phrasely == false
+    #   @reading_puzzle = @reading.paragraphs.sentances.shuffle
+    # elsif @reading.phrasely && @reading.sentancely == false && @reading.paragraphly == false
+    #   @reading_puzzle = @reading.paragraphs.sentances.phrases.shuffle
+    # elsif @reading.paragraphly && @reading.sentancely && @reading.phrasely == false
+    #   @reading_puzzle = @reading.shuffle_p_and_s(@reading)
+    # elsif @reading.paragraphly && @reading.phrasely && @reading.sentancely == false
+    #   @reading_puzzle = @reading.shuffle_p_and_ph(@reading)
+    # elsif @reading.sentancely && @reading.phrasely && @reading.paragraphly == false
+    #   @reading_puzzle = @reading.scramble_s_and_ph(@reading)
+    # elsif @reading.paragraphly && @reading.sentancely && @reading.phrasely 
+    #   @reading_puzzle = @reading.shuffle_all(@reading)
+    # end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,24 +51,44 @@ class ReadingsController < ApplicationController
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
     if @reading.save
-      @paragraphs = @reading.content.split(%r{\n\r}) #split on new line
+      @paragraphs = @reading.content.split(/\n\r/) #split on new line
       @paragraphs.each do |p| 
         @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-        @paragraph.save
-        @sentances = p.split(%r{.\|\?}) #split on periods and ?s
+        if @paragraph.save
+          binding.pry
+        else
+          respond_to do |format|
+            format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+            format.json { render json: @paragraph.errors, status: :unprocessable_entity }
+          end
+        end
+        @sentances = p.scan /.*?[.!?](?:\s|$)/
+        # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
         @sentances.each do |s|
           @psentance = Paragraph.find_by_id(@paragraph.id)
-          @sentance = @psentance.sentances.build()
-          @sentance.save
-          @phrases = s.split(%r{\,|\;|nor|or|yet|so|\(})
+          @sentance = @psentance.sentances.build(paragraph_id: @psentance.id)
+          if @sentance.save
+          else
+            respond_to do |format|
+              format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+              format.json { render json: @sentance.errors, status: :unprocessable_entity }
+            end
+          end
+          @phrases = s.split(/\,|\;|\:|nor|or|yet|so|\(/)
           @phrases.each do |ph|
             @sphrase = Sentance.find_by_id(@sentance.id)
-            @phrase = @sphrase.phrases.build(text: ph)
-            @phrase.save
+            @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
+            if @phrase.save
+            else
+              respond_to do |format|
+                format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                format.json { render json: @phrase.errors, status: :unprocessable_entity }
+              end
+            end
           end
         end
       end
-              binding.pry
+
       respond_to do |format| 
         format.html { redirect_to @library, notice: 'Reading was successfully created.' }
         format.json { render json: @reading, status: :created, location: @reading }

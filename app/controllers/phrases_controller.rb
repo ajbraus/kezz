@@ -1,5 +1,9 @@
 class PhrasesController < ApplicationController
 	
+	def index
+  	@phrases = Phrase.all(:order => 'position')
+	end
+
 	def destroy
 		@sentance = Sentance.find(params[:reading_id])
     @phrase = @sentance.phrases.find(params[:id])

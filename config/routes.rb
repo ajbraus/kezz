@@ -6,6 +6,26 @@ Kezz::Application.routes.draw do
     end
   end
 
+  resources :paragraphs do
+    collection do
+      post :sort
+    end
+  end
+
+  resources :sentances do
+    collection do
+      post :sort
+    end
+  end
+
+  resources :phrases do
+    collection do
+      post :sort
+    end
+  end
+
+
+
   match '/about', :to => 'pages#about', :as => "about"
   match '/contact', :to => 'pages#contact', :as => "contact"
   match '/home', to: 'pages#home', as: "home"

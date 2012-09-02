@@ -1,8 +1,3 @@
-<header>
-	<div class="logo"><%= link_to "Kezz", root_path %></div>
-	<h1> Welcome to Kezz </h1>
-</header>
-
 <% if user_signed_in? %>
 	<h1> Welcome, <%= current_user.first_name %><h1>	
 	<% if @libraries.empty? %>

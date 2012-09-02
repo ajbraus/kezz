@@ -17,71 +17,37 @@ class Reading < ActiveRecord::Base
 
 	def at_least_one
 	  if %w(paragraphly sentancely phrasely).all?{|attr| self[attr].blank?}
-	    errors.add(:base, "message")
+	    errors.add(:base, "You must pick at least one parser")
 	  end
 	end
 
-  def reading_puzzle(reading)
-    reading.paragraphs.each do |p|
-      if reading.paragraphly
-        scramble(p)
-      else
-        p.sentances.each do |s|
-          if reading.sentancely
-            scramble(s)
-          else
-            s.phrases.each do |ph|
-              if reading.phrasely
-                scramble(ph)
-              end
-            end
-          end
-        end
-      end
-    end
-  end
+  # def shuffle_p_and_s(r)
+  #   r.paragraphs.shuffle.each do |p|
+  #     p.sentances.shuffle
+  #   end
+  # end
 
-  def reading_puzzle(reading)
-    if reading.paragraphly
-      reading.paragraphs.scramble
-    elsif reading.sentancely
-      reading.paragraphs.sentances.scramble
-    elsif reading.phrasely
-      reading.paragraphs.sentances.phrases.scramble
-    elsif reading.paragraphly && reading.sentancely
-      reading.scramble_p_and_s(reading)
-    elsif reading.paragraphly && reading.phrasely
-      reading.scramble_p_and_ph(reading)
-    elsif reading.sentancely && reading.phrasely
-      reading.scramble_s_and_ph(reading)
-    end
-  end
+  # def shuffle_p_and_ph(r)
+  #   r.paragraphs.shuffle.each do |p|
+  #     p.sentances.phrases.shuffle
+  #   end
+  # end
 
-  def scramble_p_and_s(r)
-    r.paragraphs.scramble.each do |p|
-      p.sentances.scramble
-    end
-  end
+  # def shuffle_s_and_ph(r)
+  #   r.paragraphs.each do |p|
+  #     p.sentances.shuffle.each do |s|
+  #       s.phrases.shuffle
+  #     end
+  #   end
+  # end
 
-  def scramble_p_and_ph(r)
-    r.paragraphs.scramble.each do |p|
-      p.sentances.phrases.scramble
-    end
-  end
-
-  def scramble_s_and_ph(r)
-    r.paragraphs.each do |p|
-      p.sentances.scramble.each do |s|
-        s.phrases.scramble
-      end
-    end
-  end
-
-  def scramble
-    #take each element provided and fuck up its position
-    #when do I log its real position? - upon create duh! 
-    #so if I just compare ids to a range => 0..reading.paragraphs.count
-  end
+  # def shuffle_all(r)
+  #   r.paragraphs.shuffle.each do |p|
+  #     p.sentances.shuffle.each do |s|
+  #       s.phrases.shuffle
+  #     end
+  #   end
+  # end
 
     # count how many elements and save that as a range in the session
 
