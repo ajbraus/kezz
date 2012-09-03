@@ -9,9 +9,6 @@
 <body>
 <header>
   <div class="logo"><%= link_to "Kezz", root_path %></div>
-  <% if current_user.sign_in_count == 1 %>
-    <h1> Welcome to Kezz </h1>
-  <% end %>
 </header>
 <ul class="hmenu">
 <% if user_signed_in? %>
@@ -34,7 +31,9 @@
 <% end %>
 </ul>
 
-<%= yield %>
+<div id="layout">
+  <%= yield %>
+</div>
 
 <footer>
   <ul class="hmenu">

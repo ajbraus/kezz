@@ -21,14 +21,14 @@
   <%= @reading.summary %>
 </p>
 
-<section>
+<section class="pSortable">
   <% @reading_puzzle.each do |p| %>
-    <p id="paragraph_<%= p.id %>"><span class="handle">[P]</span>
+    <p id="paragraph_<%= p.id %>" class="sSortable"><span class="handle">&#182;</span>
     <% p.sentances.each do |s| %>
-      <span id="sentance_<%= s.id %>"><span class="handle">[S]</span>
+      <span id="sentance_<%= s.id %>" class="phSortable"><span class="handle">&#167;</span>
       <% s.phrases.each do |ph| %>
         <span id="phrase_<%= ph.id %>">
-          <span class="handle">[Ph]</span>
+          <span class="handle">&#186;</span>
           <%= ph.text %>
         </span>
       <% end %>

@@ -1,18 +1,3 @@
-display child resources randomly
-
-    24: <section>
- => 25:   <%-binding.pry %>
-    26:   <% @reading_puzzle.paragraphs.each do |p| %>
-    27:     <% p.sentances do |s| %>
-    28:       <% s.phrases do |ph| %>
-    29:         <p id="paragraph_<%= p.id %>">
-    30:           <span id="sentance_<% s.id %>">
-
-1.9.3 (#<#<Class:0x007faf87eca7a0>:0x007faf83a4c948>):0 > @reading_puzzle
-=> [#<Paragraph id: 5, position: 2, reading_id: 1, created_at: "2012-09-01 18:51:38", updated_at: "2012-09-01 18:51:38">,
- #<Paragraph id: 6, position: 3, reading_id: 1, created_at: "2012-09-01 18:51:39", updated_at: "2012-09-01 18:51:39">,
- #<Paragraph id: 4, position: 1, reading_id: 1, created_at: "2012-09-01 18:51:36", updated_at: "2012-09-01 18:51:36">]
-1.9.3 (#<#<Class:0x007faf87eca7a0>:0x007faf83a4c948>):0 > 
-
-currently getting an array of shuffled paragraphs == GOOD!
-but we want the position to be ascending not random 
+clean up parsing regexs
+shuffle 'em
+check 'em button
