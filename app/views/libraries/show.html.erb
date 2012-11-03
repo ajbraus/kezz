@@ -1,21 +1,28 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <b>Name:</b>
-  <%= @library.name %>
-</p>
-<p>
-  <b>Creator:</b>
-  <%= @library.creator.name %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= @library.description %>
-</p>
+<div class="data">
+	<p id="notice"><%= notice %></p>
+	<p>
+	  <b>Name:</b>
+	  <%= @library.name %>
+	</p>
+	<p>
+	  <b>Creator:</b>
+	  <%= @library.creator.name %>
+	</p>
+	<p>
+	  <b>Description:</b>
+	  <%= @library.description %>
+	</p>
+</div>
+<section>
 <% if @readings %>
 	<h2>Here are your delightful Readings</h2>
 	<% @readings.each do |r| %>
 		<ul>
 			<li><%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
+				<% if current_user == @library.creator %>
+					<span><%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
+				<% end %>
+			</li>
 		</ul>
 	<% end %>
 
@@ -27,3 +34,4 @@
 
 <%= link_to 'Edit', edit_library_path(@library) %> |
 <%= link_to 'Back', libraries_path %>
+</section>

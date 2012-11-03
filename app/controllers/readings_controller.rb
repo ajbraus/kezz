@@ -55,14 +55,13 @@ class ReadingsController < ApplicationController
       @paragraphs.each do |p| 
         @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
         if @paragraph.save
-          binding.pry
         else
           respond_to do |format|
             format.html { render action: "new", notice: 'There was an error. Reading not created.' }
             format.json { render json: @paragraph.errors, status: :unprocessable_entity }
           end
         end
-        @sentances = p.scan /.*?[.!?](?:\s|$)/
+        @sentances = p.split(/(?<=\.  )|(?<=\. )|(?<=\?  )|(?<=\? )|(?<=\!  )|(?<=\! )|(?<=\" )/)
         # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
         @sentances.each do |s|
           @psentance = Paragraph.find_by_id(@paragraph.id)
@@ -74,7 +73,9 @@ class ReadingsController < ApplicationController
               format.json { render json: @sentance.errors, status: :unprocessable_entity }
             end
           end
-          @phrases = s.split(/\,|\;|\:|nor|or|yet|so|\(/)
+          @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
+            binding.pry
+          @phrases[0].uncapitalize
           @phrases.each do |ph|
             @sphrase = Sentance.find_by_id(@sentance.id)
             @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
@@ -107,14 +108,46 @@ class ReadingsController < ApplicationController
     @library = Library.find(params[:library_id])
     @reading = @library.readings.find(params[:id])
 
-    respond_to do |format|
-      if @reading.update_attributes(params[:reading])
-        format.html { redirect_to @reading, notice: 'Reading was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @reading.errors, status: :unprocessable_entity }
+    if @reading.save
+      @paragraphs = @reading.content.split(/\n\r/) #split on new line
+      @paragraphs.each do |p| 
+        @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
+        if @paragraph.save
+        else
+          respond_to do |format|
+            format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+            format.json { render json: @paragraph.errors, status: :unprocessable_entity }
+          end
+        end
+        @sentances = p.scan /.*?[.!?](?:\s|$)/
+        # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
+        @sentances.each do |s|
+          @psentance = Paragraph.find_by_id(@paragraph.id)
+          @sentance = @psentance.sentances.build(paragraph_id: @psentance.id)
+          if @sentance.save
+          else
+            respond_to do |format|
+              format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+              format.json { render json: @sentance.errors, status: :unprocessable_entity }
+            end
+          end
+          @phrases = s.split(/\,|\;|\:|\bnor\b|\bor\b|\, and\b|\(/)
+          @phrases.each do |ph|
+            @sphrase = Sentance.find_by_id(@sentance.id)
+            @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
+            if @phrase.save
+            else
+              respond_to do |format|
+                format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                format.json { render json: @phrase.errors, status: :unprocessable_entity }
+              end
+            end
+          end
+        end
       end
+    else
+      format.html { render action: "edit" }
+      format.json { render json: @reading.errors, status: :unprocessable_entity }
     end
   end
 
@@ -126,7 +159,7 @@ class ReadingsController < ApplicationController
     @reading.destroy
 
     respond_to do |format|
-      format.html { redirect_to readings_url }
+      format.html { redirect_to @library }
       format.json { head :no_content }
     end
   end

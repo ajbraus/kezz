@@ -12,4 +12,9 @@ class Sentance < ActiveRecord::Base
   	render nothing: true
   end
 
+  def uncapitalize
+    self[0, 1].downcase + self[1..-1]
+  end
+
+
 end

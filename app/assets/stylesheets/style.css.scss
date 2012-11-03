@@ -1,4 +1,43 @@
-#layout { width: 400px; margin: 0 auto;}
+/*mixins*/
+$divider: #D1CDCD;
+
+body{
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif ;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.wrapper {
+	width: 96%;
+	margin: 0 auto;
+}
+
+header {
+	height:30px;
+}
+
+.logo {
+	float:left;
+}
+
+ul.hmenu li {
+  display: inline;  
+}
+
+header ul.hmenu {
+  float:right;
+  margin:0;
+  padding:0;
+}
+
+footer ul.hmenu {
+	margin:20px;
+	float:right;
+}
+
+#layout { width: 89%; margin: 0 auto;}
 
 span.ui-sortable-placeholder { background-color: orange; width:100px; height:25px; }
 .handle { color: #777; cursor: move; font-size: 12px; }￼
@@ -39,4 +78,52 @@ li {
 .btn:active {
 	position:relative;
 	top:1px;
+}
+
+.data {
+	margin: 0 auto;
+width: 640px;
+}
+
+section {
+	font-weight: 600;
+	max-width: 640px;
+	margin:0 auto;
+}
+
+.reading {
+	border-top:1px solid $divider;
+	border-bottom:1px solid $divider;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size:19px;
+	line-height: 1.6;
+}
+
+footer {
+	margin-top: 50px;
+}
+
+.field #reading_summary {
+	height:60px;
+	width:100%;
+	max-width:300px;
+}
+
+.field #reading_content {
+	width: 100%;
+max-width: 640px;
+}
+
+.checkboxes ul {
+	display:inline;
+}
+
+.phandle, .shandle, .phhandle {
+	cursor:move;
+}
+
+.phandle {
+	position: relative;
+right: 55px;
+margin-left: 30px;
 }

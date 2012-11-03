@@ -1,15 +1,17 @@
 $(document).ready(function() {        
   $('.pSortable').sortable({
-  	handle: '.handle',
+  	placeholder: "ui-state-highlight",
+    handle: '.phandle',
 		items: 'p',
 		opacity: 0.6,
     update: function(event, ui) {
-        var paragraph_order = $(this).sortable('toArray').toString();W
+        var paragraph_order = $(this).sortable('toArray').toString();
       //this will give you the new order list from here you can fire ajax call for updating the order
     }
   });
   $('.sSortable').sortable({
-  	handle: '.handle',
+  	placeholder: "ui-state-highlight",
+    handle: '.shandle',
   	revert: true,
   	opacity: 0.6,
  	  zIndex: 5,
@@ -19,7 +21,8 @@ $(document).ready(function() {
     }
   });
   $('.phSortable').sortable({
-   handle: '.handle',
+   placeholder: "ui-state-highlight",
+   handle: '.phhandle',
  	 opacity: 0.6,
  	 revert: true,
  	 zIndex: 5,

@@ -2,42 +2,48 @@
 <html>
 <head>
   <title>Kezz</title>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <div class="logo"><%= link_to "Kezz", root_path %></div>
-</header>
-<ul class="hmenu">
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
-<% end %>
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Edit registration', edit_user_registration_path) %>
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Register', new_user_registration_path)  %>
-  </li>
-<% end %>
-</ul>
+<div class="wrapper">
+  <header>
+    <div class="logo"><%= link_to "Kezz", root_path %></div>
+    <ul class="hmenu">
+      <% if user_signed_in? %>
+        <li>
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   
+        </li>
+      <% else %>
+        <li>
+        <%= link_to('Login', new_user_session_path)  %>  
+        </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li>
+        <%= link_to('Edit registration', edit_user_registration_path) %>
+        </li>
+      <% else %>
+        <li>
+        <%= link_to('Register', new_user_registration_path)  %>
+        </li>
+      <% end %>
+    </ul>
+  </header>
 
-<div id="layout">
-  <%= yield %>
-</div>
+  <div id="layout">
+    <section>
+      <%= yield %>
+    </section>
+  </div>
 
 <footer>
   <ul class="hmenu">
     <li><%= link_to 'About us', about_path  %> </li>
-    <li><%= link_to 'Contact us', contact_path  %> </li>    
+    <li><%= link_to 'Contact us', contact_path  %> </li> 
+</footer>
+</div>   
 </body>
 </html>

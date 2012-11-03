@@ -21,24 +21,16 @@
   </div>
   <div class="field">
     <%= f.label :summary %><br />
-    <%= f.text_field :summary %>
+    <%= f.text_area :summary %>
   </div>
   <div class="checkboxes">
-    </ul>
-      <li>
-        <%= f.check_box :phrasely, checked: true %> <%= f.label :phrasely %>
-      </li>
-      <li>
-        <%= f.check_box :sentancely, checked: true %> <%= f.label :sentancely %>
-      </li>
-      <li>
-        <%= f.check_box :paragraphly, checked: true %> <%= f.label :paragraphly %>
-      </li>
-    </ul>
+    <%= f.check_box :phrasely, checked: true %> <%= f.label :phrasely, raw("&#182;") %>
+    <%= f.check_box :sentancely, checked: true %> <%= f.label :sentancely, raw("&#167;") %>
+    <%= f.check_box :paragraphly, checked: true %> <%= f.label :paragraphly, raw("&#186;") %>
   </div>
   <div class="field">
     <%= f.label :content, "Text" %><br />
-    <%= f.text_area :content, rows: 35, cols: 130 %>
+    <%= f.text_area :content %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,34 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @reading.title %>
-</p>
+<div class="data">
+  <p>
+    <b>Title:</b>
+    <%= @reading.title %>
+  </p>
 
-<p>
-  <b>Library:</b>
-  <%= @reading.library.name %>
-</p>
+  <p>
+    <b>Library:</b>
+    <%= @reading.library.name %>
+  </p>
 
-<p>
+  <p>
 
-<b>Author:</b>
-  <%= @reading.author %>
-</p>
+  <b>Author:</b>
+    <%= @reading.author %>
+  </p>
 
-<p>
-  <b>Summary:</b>
-  <%= @reading.summary %>
-</p>
-
-<section class="pSortable">
+  <p>
+    <b>Summary:</b>
+    <%= @reading.summary %>
+  </p>
+</div>
+<section class="pSortable reading">
   <% @reading_puzzle.each do |p| %>
-    <p id="paragraph_<%= p.id %>" class="sSortable"><span class="handle">&#182;</span>
+    <p id="paragraph_<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
     <% p.sentances.each do |s| %>
-      <span id="sentance_<%= s.id %>" class="phSortable"><span class="handle">&#167;</span>
+      <span id="sentance_<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
       <% s.phrases.each do |ph| %>
-        <span id="phrase_<%= ph.id %>">
-          <span class="handle">&#186;</span>
+        <span id="phrase_<%= ph.id %>" class="getId">
+          <span class="phhandle">&#186;</span>
           <%= ph.text %>
         </span>
       <% end %>

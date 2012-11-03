@@ -10,5 +10,4 @@ class Phrase < ActiveRecord::Base
   	end
   	render nothing: true
   end
-
 end

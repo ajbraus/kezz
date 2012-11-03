@@ -1,3 +1,26 @@
 clean up parsing regexs
-shuffle 'em
+	handle dialogue
+		Setnances
+			break after !" , ?" , ."
+		Phrases
+			break after ,"
+			
+
+downcase first characters of sentances
+
+upcase beginnings of sentances in js
+
 check 'em button
+	Create reading (paragraph ids, sentance ids, phrases id)
+	scramble
+
+Index page without being logged in and when you're logged in
+
+
+Usecases:
+
+I'm Tony the teacher 
+
+
+
+
