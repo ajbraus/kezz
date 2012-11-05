@@ -1,10 +1,4 @@
 clean up parsing regexs
-	handle dialogue
-		Setnances
-			break after !" , ?" , ."
-		Phrases
-			break after ,"
-			
 
 downcase first characters of sentances
 

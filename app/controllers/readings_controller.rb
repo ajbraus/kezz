@@ -61,8 +61,8 @@ class ReadingsController < ApplicationController
             format.json { render json: @paragraph.errors, status: :unprocessable_entity }
           end
         end
-        @sentances = p.split(/(?<=\.  )|(?<=\. )|(?<=\?  )|(?<=\? )|(?<=\!  )|(?<=\! )|(?<=\" )/)
-        # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
+        @sentances = p.split(/(?<=\.\s\s)|(?<=\.\s)|(?<=\?\s\s)|(?<=\?\s)|(?<=\!\s\s)|(?<=\!\s)|(?<=\"\s)/)
+        binding.pry
         @sentances.each do |s|
           @psentance = Paragraph.find_by_id(@paragraph.id)
           @sentance = @psentance.sentances.build(paragraph_id: @psentance.id)
@@ -74,9 +74,8 @@ class ReadingsController < ApplicationController
             end
           end
           @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
-            binding.pry
-          @phrases[0].uncapitalize
           @phrases.each do |ph|
+            ph[0..1].downcase!
             @sphrase = Sentance.find_by_id(@sentance.id)
             @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
             if @phrase.save
