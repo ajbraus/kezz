@@ -6,19 +6,19 @@ class ReadingsController < ApplicationController
     @reading = Reading.find(params[:id])
     @reading_puzzle = @reading.paragraphs
 
-    # if @reading.paragraphly == true && @reading.sentancely == false && @reading.phrasely == false
+    # if @reading.paragraphly == true && @reading.sentencely == false && @reading.phrasely == false
     #   @reading_puzzle = @reading.paragraphs.shuffle 
-    # elsif @reading.sentancely && @reading.paragraphly == false && @reading.phrasely == false
-    #   @reading_puzzle = @reading.paragraphs.sentances.shuffle
-    # elsif @reading.phrasely && @reading.sentancely == false && @reading.paragraphly == false
-    #   @reading_puzzle = @reading.paragraphs.sentances.phrases.shuffle
-    # elsif @reading.paragraphly && @reading.sentancely && @reading.phrasely == false
+    # elsif @reading.sentencely && @reading.paragraphly == false && @reading.phrasely == false
+    #   @reading_puzzle = @reading.paragraphs.sentences.shuffle
+    # elsif @reading.phrasely && @reading.sentencely == false && @reading.paragraphly == false
+    #   @reading_puzzle = @reading.paragraphs.sentences.phrases.shuffle
+    # elsif @reading.paragraphly && @reading.sentencely && @reading.phrasely == false
     #   @reading_puzzle = @reading.shuffle_p_and_s(@reading)
-    # elsif @reading.paragraphly && @reading.phrasely && @reading.sentancely == false
+    # elsif @reading.paragraphly && @reading.phrasely && @reading.sentencely == false
     #   @reading_puzzle = @reading.shuffle_p_and_ph(@reading)
-    # elsif @reading.sentancely && @reading.phrasely && @reading.paragraphly == false
+    # elsif @reading.sentencely && @reading.phrasely && @reading.paragraphly == false
     #   @reading_puzzle = @reading.scramble_s_and_ph(@reading)
-    # elsif @reading.paragraphly && @reading.sentancely && @reading.phrasely 
+    # elsif @reading.paragraphly && @reading.sentencely && @reading.phrasely 
     #   @reading_puzzle = @reading.shuffle_all(@reading)
     # end
 
@@ -61,23 +61,23 @@ class ReadingsController < ApplicationController
             format.json { render json: @paragraph.errors, status: :unprocessable_entity }
           end
         end
-        @sentances = p.split(/(?<=\.\s\s)|(?<=\.\s)|(?<=\?\s\s)|(?<=\?\s)|(?<=\!\s\s)|(?<=\!\s)|(?<=\"\s)/)
+        @sentences = p.split(/(?<=\.\s\s)|(?<=\.\s)|(?<=\?\s\s)|(?<=\?\s)|(?<=\!\s\s)|(?<=\!\s)|(?<=\"\s)/)
         binding.pry
-        @sentances.each do |s|
-          @psentance = Paragraph.find_by_id(@paragraph.id)
-          @sentance = @psentance.sentances.build(paragraph_id: @psentance.id)
-          if @sentance.save
+        @sentences.each do |s|
+          @psentence = Paragraph.find_by_id(@paragraph.id)
+          @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+          if @sentence.save
           else
             respond_to do |format|
               format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @sentance.errors, status: :unprocessable_entity }
+              format.json { render json: @sentence.errors, status: :unprocessable_entity }
             end
           end
           @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
           @phrases.each do |ph|
             ph[0..1].downcase!
-            @sphrase = Sentance.find_by_id(@sentance.id)
-            @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
+            @sphrase = sentence.find_by_id(@sentence.id)
+            @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
             if @phrase.save
             else
               respond_to do |format|
@@ -118,22 +118,22 @@ class ReadingsController < ApplicationController
             format.json { render json: @paragraph.errors, status: :unprocessable_entity }
           end
         end
-        @sentances = p.scan /.*?[.!?](?:\s|$)/
+        @sentences = p.scan /.*?[.!?](?:\s|$)/
         # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
-        @sentances.each do |s|
-          @psentance = Paragraph.find_by_id(@paragraph.id)
-          @sentance = @psentance.sentances.build(paragraph_id: @psentance.id)
-          if @sentance.save
+        @sentences.each do |s|
+          @psentence = Paragraph.find_by_id(@paragraph.id)
+          @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+          if @sentence.save
           else
             respond_to do |format|
               format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @sentance.errors, status: :unprocessable_entity }
+              format.json { render json: @sentence.errors, status: :unprocessable_entity }
             end
           end
           @phrases = s.split(/\,|\;|\:|\bnor\b|\bor\b|\, and\b|\(/)
           @phrases.each do |ph|
-            @sphrase = Sentance.find_by_id(@sentance.id)
-            @phrase = @sphrase.phrases.build(text: ph, sentance_id: @sphrase.id)
+            @sphrase = sentence.find_by_id(@sentence.id)
+            @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
             if @phrase.save
             else
               respond_to do |format|
@@ -171,8 +171,8 @@ class ReadingsController < ApplicationController
     params[:paragraphs].each_with_index do |id, index|
       Paragraph.update_all(['position=?', index+1], ['id=?', id])
     end
-    params[:sentances].each_with_index do |id, index|
-      Sentance.update_all(['position=?', index+1], ['id=?', id])
+    params[:sentences].each_with_index do |id, index|
+      sentence.update_all(['position=?', index+1], ['id=?', id])
     end
     params[:phrases].each_with_index do |id, index|
       Phrase.update_all(['position=?', index+1], ['id=?', id])

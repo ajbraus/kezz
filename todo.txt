@@ -1,20 +1,31 @@
 clean up parsing regexs
 
-downcase first characters of sentances
+downcase first characters of sentences
 
-upcase beginnings of sentances in js
+upcase beginnings of sentences in js
 
 check 'em button
-	Create reading (paragraph ids, sentance ids, phrases id)
+	Create reading (paragraph ids, sentence ids, phrases id)
 	scramble
 
-Index page without being logged in and when you're logged in
+pin/like/save libraries and they go to your profile as liked/pinned/saved
 
 
 Usecases:
 
 I'm Tony the teacher 
+	I log on to kezz to create kezz libraries to use as homework and in class exersices for my students
+	I like the way that I can see each student's progress on their homework and comprehension (I see time taken to complete, # of submits, and # of hints). 
+	I don't like that it is so easy for the students to cheat, one google search and they find the text and the answer, I guess even then they are at least reading it all the way through. I do get potential cheater stats if they submit only once and take no hints.
+	I also like that I can find existing libraries and related libraries to what I teach.
 
+I'm Sally the student
+	I log into kezz because my teacher requires us to do some in class exercises and homework in kezz.
+	I like it because I am a hand's on learner and because I improve and earn points and badges from my teacher and from the site. It makes doing my homework fun.
 
+I'm Nikolai the Russian
+	I log into Kezz to improve my english composition and reading comprehension. 
 
+I'm Ian the investor
+	I like kezz because it is a platform with many users and a proven model. I plan to buy it for oodles of money and wrap it into a giant soulless backward educational technologly corporation
 

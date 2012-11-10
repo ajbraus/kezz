@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+	<div class="personal">
+		<h2> Welcome, <%= current_user.name %> </h2>
+	<%= link_to  "Create New Library", new_library_path, class: "btn" %>
+	</div>
+<% end %>
+
+<div class="browse">
+	<% @libraries.each do |l| %>
+		<%= render partial: 'shared/library_shield', locals: { :library => l } %>
+	<% end %>
+</div>

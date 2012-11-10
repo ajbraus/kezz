@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
 	before_filter :authenticate_user!, except: [:home]
 
-	def home
-		if user_signed_in?
-			@libraries = current_user.libraries
-		end	
+	def profile
+		@libraries = current_user.libraries
+		@attempted_readings = []
+		@completed_readings = []
 	end
 
 	def about

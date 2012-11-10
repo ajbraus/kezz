@@ -1,8 +1,8 @@
 class Phrase < ActiveRecord::Base
-  belongs_to :sentance
-  attr_accessible :position, :text, :sentance_id
+  belongs_to :sentence
+  attr_accessible :position, :text, :sentence_id
 
-  acts_as_list :scope => :sentance
+  acts_as_list :scope => :sentence
 
   def sort
   	params[:phrases].each_with_index do |id, index|

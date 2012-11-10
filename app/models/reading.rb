@@ -8,7 +8,7 @@ class Reading < ActiveRecord::Base
   								:summary, 
   								:title, 
   								:paragraphly, 
-  								:sentancely,
+  								:sentencely,
   								:phrasely
 
   validates :author, :content, :title, presence: true
@@ -16,26 +16,26 @@ class Reading < ActiveRecord::Base
   validate :at_least_one
 
 	def at_least_one
-	  if %w(paragraphly sentancely phrasely).all?{|attr| self[attr].blank?}
+	  if %w(paragraphly sentencely phrasely).all?{|attr| self[attr].blank?}
 	    errors.add(:base, "You must pick at least one parser")
 	  end
 	end
 
   # def shuffle_p_and_s(r)
   #   r.paragraphs.shuffle.each do |p|
-  #     p.sentances.shuffle
+  #     p.sentences.shuffle
   #   end
   # end
 
   # def shuffle_p_and_ph(r)
   #   r.paragraphs.shuffle.each do |p|
-  #     p.sentances.phrases.shuffle
+  #     p.sentences.phrases.shuffle
   #   end
   # end
 
   # def shuffle_s_and_ph(r)
   #   r.paragraphs.each do |p|
-  #     p.sentances.shuffle.each do |s|
+  #     p.sentences.shuffle.each do |s|
   #       s.phrases.shuffle
   #     end
   #   end
@@ -43,7 +43,7 @@ class Reading < ActiveRecord::Base
 
   # def shuffle_all(r)
   #   r.paragraphs.shuffle.each do |p|
-  #     p.sentances.shuffle.each do |s|
+  #     p.sentences.shuffle.each do |s|
   #       s.phrases.shuffle
   #     end
   #   end

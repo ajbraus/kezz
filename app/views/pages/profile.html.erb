@@ -1,0 +1,32 @@
+<h1> Welcome, <%= current_user.first_name %><h1>	
+<div class="my_libraries">
+	<h2>Here are your delightful libraries</h2>
+	<% @libraries.each do |l| %>
+		<%= render partial: 'shared/library_shield', locals: { :library => l } %>
+	<% end %>
+	<%= link_to  "Create New Library", new_library_path, class: "btn" %>
+</div>
+
+<div class="attempted">
+	Attempted
+	<% if @attempted_readings.empty? %>
+		<h2>You have attempted no Kezz :o( </h2>
+	<% else %>
+		<h2>completed Kezz</h2>
+			<% @attempted_readings.each do |ck| %>
+				<%= render partial: 'shared/reading_shield', locals: { :kezz => ck } %>
+			<% end %>
+	<% end %>
+</div>
+
+<div class="completed">
+	Completed
+	<% if @completed_readings.empty? %>
+		<h2>You have completed no Kezz :o( </h2>
+	<% else %>
+		<h2>completed Kezz</h2>
+		<% @completed_readings.each do |ck| %>
+			<%= render partial: 'shared/reading_shield', locals: { :kezz => ck } %>
+		<% end %>
+	<% end %>
+</div>

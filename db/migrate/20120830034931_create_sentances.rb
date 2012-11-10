@@ -1,11 +1,11 @@
-class CreateSentances < ActiveRecord::Migration
+class Createsentences < ActiveRecord::Migration
   def change
-    create_table :sentances do |t|
+    create_table :sentences do |t|
       t.integer 		:position
       t.references 	:paragraph, null: false
 
       t.timestamps
     end
-    add_index :sentances, :paragraph_id
+    add_index :sentences, :paragraph_id
   end
 end

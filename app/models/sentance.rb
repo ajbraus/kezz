@@ -1,4 +1,4 @@
-class Sentance < ActiveRecord::Base
+class sentence < ActiveRecord::Base
   belongs_to :paragraph
   has_many :phrases, dependent: :destroy
   attr_accessible :position, :paragraph_id
@@ -6,8 +6,8 @@ class Sentance < ActiveRecord::Base
   acts_as_list scope: :paragraph
 
   def sort
-  	params[:sentances].each_with_index do |id, index|
-  		Sentance.update_all(['position=?', index+1], ['id=?', id])
+  	params[:sentences].each_with_index do |id, index|
+  		sentence.update_all(['position=?', index+1], ['id=?', id])
   	end
   	render nothing: true
   end

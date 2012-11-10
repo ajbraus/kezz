@@ -3,10 +3,10 @@ class CreatePhrases < ActiveRecord::Migration
     create_table :phrases do |t|
     	t.string			:text, null: false
       t.integer 		:position
-      t.references 	:sentance, null: false
+      t.references 	:sentence, null: false
 
       t.timestamps
     end
-    add_index :phrases, :sentance_id
+    add_index :phrases, :sentence_id
   end
 end

@@ -25,8 +25,8 @@
 <section class="pSortable reading">
   <% @reading_puzzle.each do |p| %>
     <p id="paragraph_<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
-    <% p.sentances.each do |s| %>
-      <span id="sentance_<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
+    <% p.sentences.each do |s| %>
+      <span id="sentence_<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
       <% s.phrases.each do |ph| %>
         <span id="phrase_<%= ph.id %>" class="getId">
           <span class="phhandle">&#186;</span>
@@ -43,7 +43,7 @@
             <% if false %>
             <%= sortable_element('phrases', :url => 'sort_phrases_path') %>
           </span>
-          <%= sortable_element('sentances', :url => 'sort_sentances_path') %>
+          <%= sortable_element('sentences', :url => 'sort_sentences_path') %>
         </p>
         <%= sortable_element('paragraphs', :url => 'sort_paragraphs_path') %>
             <% end %>

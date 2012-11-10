@@ -16,7 +16,7 @@ $(document).ready(function() {
   	opacity: 0.6,
  	  zIndex: 5,
     update: function(event, ui) {
-        var sentance_order = $(this).sortable('toArray').toString();
+        var sentence_order = $(this).sortable('toArray').toString();
       //this will give you the new order list from here you can fire ajax call for updating the order
     }
   });

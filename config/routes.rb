@@ -1,4 +1,5 @@
 Kezz::Application.routes.draw do
+  root :to => 'libraries#index'
 
   devise_for :users do  
     resources :libraries do
@@ -12,7 +13,7 @@ Kezz::Application.routes.draw do
     end
   end
 
-  resources :sentances do
+  resources :sentences do
     collection do
       post :sort
     end
@@ -28,9 +29,7 @@ Kezz::Application.routes.draw do
 
   match '/about', :to => 'pages#about', :as => "about"
   match '/contact', :to => 'pages#contact', :as => "contact"
-  match '/home', to: 'pages#home', as: "home"
-
-  root :to => 'pages#home'
+  match '/profile', to: 'pages#profile', as: "profile"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

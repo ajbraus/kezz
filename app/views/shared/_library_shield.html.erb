@@ -1,0 +1,21 @@
+<p>
+  <b>Name:</b>
+  <%= library.name %>
+</p>
+<p>
+  <b>Creator:</b>
+  <%= library.creator.name %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= library.description %>
+</p>
+<% if user_signed_in? %>
+	<% if current_user = library.creator %>
+		<ul>
+		  <li><%= link_to 'Show', library %></li>
+		  <li><%= link_to 'Edit', edit_library_path(library) %></li>
+		  <li><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		</ul>
+	<% end %>
+<% end %>

@@ -1,7 +1,7 @@
-class SentancesController < ApplicationController
+class sentencesController < ApplicationController
 
 	def index
-  	@sentances = Sentance.all(:order => &rsquo;position&rsquo;)
+  	@sentences = sentence.all(:order => &rsquo;position&rsquo;)
 	end
 
 	def destroy
@@ -11,8 +11,8 @@ class SentancesController < ApplicationController
 	end
 
 	# def sort
-	#   params[:sentances].each_with_index do |id, index|
-	#     Sentance.update_all(['position=?', index+1], ['id=?', id])
+	#   params[:sentences].each_with_index do |id, index|
+	#     sentence.update_all(['position=?', index+1], ['id=?', id])
 	# 	end
 	#   render :nothing => true
 	# end

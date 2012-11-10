@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
   create_table "phrases", :force => true do |t|
     t.string   "text",        :null => false
     t.integer  "position"
-    t.integer  "sentance_id", :null => false
+    t.integer  "sentence_id", :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "phrases", ["sentance_id"], :name => "index_phrases_on_sentance_id"
+  add_index "phrases", ["sentence_id"], :name => "index_phrases_on_sentence_id"
 
   create_table "readings", :force => true do |t|
     t.string   "title",       :null => false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
     t.string   "author"
     t.string   "summary"
     t.integer  "rating"
-    t.boolean  "sentancely"
+    t.boolean  "sentencely"
     t.boolean  "phrasely"
     t.boolean  "paragraphly"
     t.integer  "library_id",  :null => false
@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(:version => 20120830034953) do
 
   add_index "readings", ["library_id"], :name => "index_readings_on_library_id"
 
-  create_table "sentances", :force => true do |t|
+  create_table "sentences", :force => true do |t|
     t.integer  "position"
     t.integer  "paragraph_id", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "sentances", ["paragraph_id"], :name => "index_sentances_on_paragraph_id"
+  add_index "sentences", ["paragraph_id"], :name => "index_sentences_on_paragraph_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
