@@ -10,6 +10,8 @@ check 'em button
 
 pin/like/save libraries and they go to your profile as liked/pinned/saved
 
+install bloggy
+
 
 Usecases:
 
