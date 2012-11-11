@@ -5,7 +5,7 @@ class PhrasesController < ApplicationController
 	end
 
 	def destroy
-		@sentence = sentence.find(params[:reading_id])
+		@sentence = Sentence.find(params[:reading_id])
     @phrase = @sentence.phrases.find(params[:id])
     @phrase.destroy
 	end

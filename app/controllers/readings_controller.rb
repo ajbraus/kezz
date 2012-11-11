@@ -62,7 +62,6 @@ class ReadingsController < ApplicationController
           end
         end
         @sentences = p.split(/(?<=\.\s\s)|(?<=\.\s)|(?<=\?\s\s)|(?<=\?\s)|(?<=\!\s\s)|(?<=\!\s)|(?<=\"\s)/)
-        binding.pry
         @sentences.each do |s|
           @psentence = Paragraph.find_by_id(@paragraph.id)
           @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
@@ -76,7 +75,7 @@ class ReadingsController < ApplicationController
           @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
           @phrases.each do |ph|
             ph[0..1].downcase!
-            @sphrase = sentence.find_by_id(@sentence.id)
+            @sphrase = Sentence.find_by_id(@sentence.id)
             @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
             if @phrase.save
             else

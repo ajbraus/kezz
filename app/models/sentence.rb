@@ -1,4 +1,4 @@
-class sentence < ActiveRecord::Base
+class Sentence < ActiveRecord::Base
   belongs_to :paragraph
   has_many :phrases, dependent: :destroy
   attr_accessible :position, :paragraph_id
