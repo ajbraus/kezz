@@ -51,8 +51,9 @@ class ReadingsController < ApplicationController
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
     if @reading.save
-      @paragraphs = @reading.content.split(/\n\r/) #split on new line
+      @paragraphs = @reading.content.split(/\n/) #split on new line
       @paragraphs.each do |p| 
+        p.chomp
         @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
         if @paragraph.save
         else
@@ -61,7 +62,7 @@ class ReadingsController < ApplicationController
             format.json { render json: @paragraph.errors, status: :unprocessable_entity }
           end
         end
-        @sentences = p.split(/(?<=\.\s\s)|(?<=\.\s)|(?<=\?\s\s)|(?<=\?\s)|(?<=\!\s\s)|(?<=\!\s)|(?<=\"\s)/)
+        @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
         @sentences.each do |s|
           @psentence = Paragraph.find_by_id(@paragraph.id)
           @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
@@ -74,7 +75,11 @@ class ReadingsController < ApplicationController
           end
           @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
           @phrases.each do |ph|
-            ph[0..1].downcase!
+            while ph.start_with?(' ') do
+              ph = ph[1..-1]
+            end
+            ph[0] = ph[0].downcase
+            ph.chomp
             @sphrase = Sentence.find_by_id(@sentence.id)
             @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
             if @phrase.save

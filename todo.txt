@@ -1,12 +1,19 @@
-clean up parsing regexs
 
-downcase first characters of sentences
 
 upcase beginnings of sentences in js
+
+--------------------------------------------------------------
+
+phrases can get behind the sentence handle :o(
+
+sentances can get behind the pharagraph handle :o(
 
 check 'em button
 	Create reading (paragraph ids, sentence ids, phrases id)
 	scramble
+
+
+--------------------------------------------------------------
 
 pin/like/save libraries and they go to your profile as liked/pinned/saved
 
