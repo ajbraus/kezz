@@ -1,4 +1,4 @@
-class Createsentences < ActiveRecord::Migration
+class CreateSentences < ActiveRecord::Migration
   def change
     create_table :sentences do |t|
       t.integer 		:position

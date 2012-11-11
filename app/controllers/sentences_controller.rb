@@ -1,7 +1,7 @@
-class sentencesController < ApplicationController
+class SentencesController < ApplicationController
 
 	def index
-  	@sentences = sentence.all(:order => &rsquo;position&rsquo;)
+  	@sentences = Sentence.all(:order => position)
 	end
 
 	def destroy
