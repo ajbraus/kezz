@@ -12,6 +12,11 @@ check 'em button
 	Create reading (paragraph ids, sentence ids, phrases id)
 	scramble
 
+--------------------------------------------------------------
+
+make basic reading shield w image
+
+hover puts a square around them
 
 --------------------------------------------------------------
 

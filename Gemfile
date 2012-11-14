@@ -7,6 +7,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'koala'
 gem 'acts_as_list'
+gem 'thin'
 #gem 'bloggy', '0.1.1'
 #gem 'airbrake'
 #gem 'newrelic_rpm'
@@ -31,13 +32,9 @@ group :test do
 	gem 'guard-spork', '1.1.0'
 end
 
-gem 'thin'
-
-
 group :assets do
 	gem 'font-awesome-sass-rails'
   gem 'sass-rails',   '~> 3.2.3'
-	gem 'jquery-ui-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
@@ -45,3 +42,4 @@ end
 
 gem 'coffee-rails', '~> 3.2.1'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
