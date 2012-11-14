@@ -1,4 +1,8 @@
 
+check 'em button
+	pass the id's of the elements as an array and check it against the array of the goods.
+
+--------------------------------------------------------------
 
 upcase beginnings of sentences in js
 
@@ -7,10 +11,6 @@ upcase beginnings of sentences in js
 phrases can get behind the sentence handle :o(
 
 sentances can get behind the pharagraph handle :o(
-
-check 'em button
-	Create reading (paragraph ids, sentence ids, phrases id)
-	scramble
 
 --------------------------------------------------------------
 

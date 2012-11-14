@@ -23,11 +23,14 @@
   </p>
 </div>
 <section class="pSortable reading">
-  <% @reading_puzzle.each do |p| %>
+  <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
+  <% @paragraphs.each do |p| %>
     <p id="paragraph_<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
-    <% p.sentences.each do |s| %>
+    <% @reading.sentencely? ? @sentences = p.sentences.shuffle : @sentences = p.sentences %>
+    <% @sentences.each do |s| %>
       <span id="sentence_<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
-      <% s.phrases.each do |ph| %>
+      <% @reading.phrasely? ? @phrases = s.phrases.shuffle : @phrases = s.phrases %>
+      <% @phrases.each do |ph| %>
         <span id="phrase_<%= ph.id %>" class="getId">
           <span class="phhandle">&#186;</span>
           <span class="phrase"><%= ph.text %></span>
@@ -53,9 +56,10 @@
   <b>Rating:</b>
   <%= @reading.rating %>
 </p>
-
-<% if current_user.id == @reading.library.user_id %>
-  <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
+<% if user_signed_in? %>
+  <% if current_user.id == @reading.library.user_id %>
+    <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
+  <% end %>
 <% end %>
 
 <%= link_to 'Back', library_readings_path %>

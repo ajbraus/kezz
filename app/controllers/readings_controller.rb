@@ -4,23 +4,6 @@ class ReadingsController < ApplicationController
   # GET /readings/1.json
   def show
     @reading = Reading.find(params[:id])
-    @reading_puzzle = @reading.paragraphs
-
-    # if @reading.paragraphly == true && @reading.sentencely == false && @reading.phrasely == false
-    #   @reading_puzzle = @reading.paragraphs.shuffle 
-    # elsif @reading.sentencely && @reading.paragraphly == false && @reading.phrasely == false
-    #   @reading_puzzle = @reading.paragraphs.sentences.shuffle
-    # elsif @reading.phrasely && @reading.sentencely == false && @reading.paragraphly == false
-    #   @reading_puzzle = @reading.paragraphs.sentences.phrases.shuffle
-    # elsif @reading.paragraphly && @reading.sentencely && @reading.phrasely == false
-    #   @reading_puzzle = @reading.shuffle_p_and_s(@reading)
-    # elsif @reading.paragraphly && @reading.phrasely && @reading.sentencely == false
-    #   @reading_puzzle = @reading.shuffle_p_and_ph(@reading)
-    # elsif @reading.sentencely && @reading.phrasely && @reading.paragraphly == false
-    #   @reading_puzzle = @reading.scramble_s_and_ph(@reading)
-    # elsif @reading.paragraphly && @reading.sentencely && @reading.phrasely 
-    #   @reading_puzzle = @reading.shuffle_all(@reading)
-    # end
 
     respond_to do |format|
       format.html # show.html.erb
