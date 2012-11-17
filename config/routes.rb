@@ -25,7 +25,7 @@ Kezz::Application.routes.draw do
     end
   end
 
-
+  match '/check_order', :to => 'readings#check_order', :as => "check_order"
 
   match '/about', :to => 'pages#about', :as => "about"
   match '/contact', :to => 'pages#contact', :as => "contact"

@@ -9,7 +9,6 @@ $(document).ready(function() {
       //this will give you the new order list from here you can fire ajax call for updating the order
     }
   });
-
   $('.sSortable').sortable({
   	placeholder: "sbackdrop",
     handle: '.shandle',

@@ -17,17 +17,30 @@
     <b>Summary:</b>
     <%= @reading.summary %>
   </p>
+  <p>
+    <b>Type:</b>
+    <% if @reading.paragraphly? %>
+      &#182;
+    <% end %>
+    <% if @reading.sentencely? %>
+      &#167;
+    <% end %>
+    <% if @reading.phrasely? %>
+      &#186;
+    <% end %>
+  </p>
+
 </div>
 <section class="pSortable reading">
   <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
   <% @paragraphs.each do |p| %>
-    <p id="paragraph_<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
+    <p id="<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
     <% @reading.sentencely? ? @sentences = p.sentences.shuffle : @sentences = p.sentences %>
     <% @sentences.each do |s| %>
-      <span id="sentence_<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
+      <span id="<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
       <% @reading.phrasely? ? @phrases = s.phrases.shuffle : @phrases = s.phrases %>
       <% @phrases.each do |ph| %>
-        <span id="phrase_<%= ph.id %>" class="getId">
+        <span id="<%= ph.id %>" class="getId">
           <span class="phhandle">&#186;</span>
           <span class="phrase"><%= ph.text %></span>
         </span>
@@ -42,13 +55,7 @@
   <%= @reading.rating %>
 </p>
 
-<% if false %>
-<%= sortable_element('phrases', :url => 'sort_phrases_path') %>
-</span>
-<%= sortable_element('sentences', :url => 'sort_sentences_path') %>
-</p>
-<%= sortable_element('paragraphs', :url => 'sort_paragraphs_path') %>
-<% end %>
+<%= link_to "Check Order", check_order_path %>
 
 <% if user_signed_in? %>
   <% if current_user.id == @reading.library.user_id %>

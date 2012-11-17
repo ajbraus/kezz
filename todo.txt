@@ -2,30 +2,57 @@
 check 'em button
 	pass the id's of the elements as an array and check it against the array of the goods.
 
+	need to $.post the data to the check_order method when they click the button
+
+	highlight effect is not a border glow
+
+	need if no errors button in the controller to count one kezz read.
+
 --------------------------------------------------------------
 
 upcase beginnings of sentences in js
+	found selector for this but don't know how to upcase the text 
+		on load and 
+		change in phase order
+
+--------------------------------------------------------------
+
+
+GO LIVE 
+
+
+---------------------------------------------------------------
+
+Personal public profile
+	kezz's you've liked
+	attempted
+	rated
+	completed
+
+
+---------------------------------------------------------------
+
+pin/like/save libraries and they go to your profile as liked/pinned/saved
+
+install bloggy
+
+--------------------------------------------------------------
+
+
+---------------------------------------------------------------
+
+make basic reading shield w image
+
+hover puts a square around them
+
+---------------------------------------------------------------
+
 
 --------------------------------------------------------------
 
 phrases can get behind the sentence handle :o(
 
 sentances can get behind the pharagraph handle :o(
-
---------------------------------------------------------------
-
-make basic reading shield w image
-
-hover puts a square around them
-
---------------------------------------------------------------
-
-pin/like/save libraries and they go to your profile as liked/pinned/saved
-
-install bloggy
-
-
----------------------------------------------------------------
 
 Gamification: 
 	Points based on:

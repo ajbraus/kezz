@@ -1,0 +1,7 @@
+<% if @out_of_order_ids.any? %>
+	<% @out_of_order_ids.each do |oooi| %>
+		$("#<%= oooi %>").effect("highlight", { #CD0000 }, 10000);
+	<% end %>
+<% else %>
+	$(".getId").effect("highlight", { #0C7908 }, 10000);
+<% end %>

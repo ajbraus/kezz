@@ -31,46 +31,47 @@ class ReadingsController < ApplicationController
   # POST /readings
   # POST /readings.json
   def create
-    binding.pry
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
     if @reading.save
       @paragraphs = @reading.content.split(/\n/) #split on new line
       @paragraphs.each do |p| 
-        p.chomp
-        @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-        if @paragraph.save
-        else
-          respond_to do |format|
-            format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-            format.json { render json: @paragraph.errors, status: :unprocessable_entity }
-          end
-        end
-        @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
-        @sentences.each do |s|
-          @psentence = Paragraph.find_by_id(@paragraph.id)
-          @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
-          if @sentence.save
+        if p.length > 1
+          p.chomp
+          @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
+          if @paragraph.save
           else
             respond_to do |format|
               format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              format.json { render json: @paragraph.errors, status: :unprocessable_entity }
             end
           end
-          @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
-          @phrases.each do |ph|
-            while ph.start_with?(' ') do
-              ph = ph[1..-1]
-            end
-            ph[0] = ph[0].downcase
-            ph.chomp
-            @sphrase = Sentence.find_by_id(@sentence.id)
-            @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
-            if @phrase.save
+          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
+          @sentences.each do |s|
+            @psentence = Paragraph.find_by_id(@paragraph.id)
+            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+            if @sentence.save
             else
               respond_to do |format|
                 format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-                format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              end
+            end
+            @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
+            @phrases.each do |ph|
+              while ph.start_with?(' ') do
+                ph = ph[1..-1]
+              end
+              ph[0] = ph[0].downcase
+              ph.chomp
+              @sphrase = Sentence.find_by_id(@sentence.id)
+              @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
+              if @phrase.save
+              else
+                respond_to do |format|
+                  format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                  format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                end
               end
             end
           end
@@ -151,8 +152,34 @@ class ReadingsController < ApplicationController
     end
   end
 
-  def check
-  #pass the position of each nested element and check it against @reading.paragraph.ids
+  def check_order
+    @submission_ids = params[:ids]
+    @id_array = []
+      @reading.paragraph.each do |p| 
+        @id_array.push(p.id)
+        p.sentence.each do |s| 
+          @id_array.push(s.id)
+          s.phrases.each do |ph|
+            @id_array.push(ph.id)
+          end
+        end
+      end
+
+    @submission_ids.each do |sid|
+      @id_array.each do |kid|
+        if sid == kid 
+          @submission_ids.drop(1)
+        end
+      end
+    end 
+
+    @out_of_order_ids = @submission_ids
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js 
+    end
+
   end
 
   def sort
