@@ -25,6 +25,42 @@ pin/like/save libraries and they go to your profile as liked/pinned/saved
 install bloggy
 
 
+---------------------------------------------------------------
+
+Gamification: 
+	Points based on:
+		difficulty of kezz
+		mistakes made
+	Get points for completing Kezzes
+	More with speed
+	badges based on
+		tags
+		creating kezzes
+		rating kezzes
+		completing kezzes
+		sharing kezzes
+		commenting on kezzes/libraries
+
+
+Machine learning:
+	Tags
+	Rate Kezzes
+	difficulty
+	Rate libraries
+
+
+Integration:
+	facebook meta tags
+	facebook authentication
+	post this kezz to your feed
+	tweet this kezz
+
+	like kezz
+	post kezz to your feed
+	tweet kezz
+
+
+
 Usecases:
 
 I'm Tony the teacher 

@@ -1,6 +1,6 @@
 $(document).ready(function() {        
   $('.pSortable').sortable({
-  	placeholder: "ui-state-highlight",
+  	placeholder: "pbackdrop",
     handle: '.phandle',
 		items: 'p',
 		opacity: 0.6,
@@ -9,8 +9,9 @@ $(document).ready(function() {
       //this will give you the new order list from here you can fire ajax call for updating the order
     }
   });
+
   $('.sSortable').sortable({
-  	placeholder: "ui-state-highlight",
+  	placeholder: "sbackdrop",
     handle: '.shandle',
   	revert: true,
   	opacity: 0.6,
@@ -21,7 +22,7 @@ $(document).ready(function() {
     }
   });
   $('.phSortable').sortable({
-   placeholder: "ui-state-highlight",
+   placeholder: "phbackdrop",
    handle: '.phhandle',
  	 opacity: 0.6,
  	 revert: true,

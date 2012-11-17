@@ -31,6 +31,7 @@ class ReadingsController < ApplicationController
   # POST /readings
   # POST /readings.json
   def create
+    binding.pry
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
     if @reading.save

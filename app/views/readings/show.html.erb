@@ -5,18 +5,14 @@
     <b>Title:</b>
     <%= @reading.title %>
   </p>
-
   <p>
     <b>Library:</b>
     <%= @reading.library.name %>
   </p>
-
   <p>
-
   <b>Author:</b>
     <%= @reading.author %>
   </p>
-
   <p>
     <b>Summary:</b>
     <%= @reading.summary %>
@@ -41,21 +37,19 @@
     </p>
   <% end %>
 </section>
-
-
-            <% if false %>
-            <%= sortable_element('phrases', :url => 'sort_phrases_path') %>
-          </span>
-          <%= sortable_element('sentences', :url => 'sort_sentences_path') %>
-        </p>
-        <%= sortable_element('paragraphs', :url => 'sort_paragraphs_path') %>
-            <% end %>
-
-
 <p>
   <b>Rating:</b>
   <%= @reading.rating %>
 </p>
+
+<% if false %>
+<%= sortable_element('phrases', :url => 'sort_phrases_path') %>
+</span>
+<%= sortable_element('sentences', :url => 'sort_sentences_path') %>
+</p>
+<%= sortable_element('paragraphs', :url => 'sort_paragraphs_path') %>
+<% end %>
+
 <% if user_signed_in? %>
   <% if current_user.id == @reading.library.user_id %>
     <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
