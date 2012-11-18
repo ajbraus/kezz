@@ -48,11 +48,13 @@ hover puts a square around them
 ---------------------------------------------------------------
 
 
---------------------------------------------------------------
-
 phrases can get behind the sentence handle :o(
 
 sentances can get behind the pharagraph handle :o(
+
+
+--------------------------------------------------------------
+
 
 Gamification: 
 	Points based on:

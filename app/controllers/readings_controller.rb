@@ -5,6 +5,17 @@ class ReadingsController < ApplicationController
   def show
     @reading = Reading.find(params[:id])
 
+    @id_array = []
+      @reading.paragraphs.each do |p| 
+        @id_array.push(p.id)
+        p.sentences.each do |s| 
+          @id_array.push(s.id)
+          s.phrases.each do |ph|
+            @id_array.push(ph.id)
+          end
+        end
+      end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @reading }
@@ -153,11 +164,13 @@ class ReadingsController < ApplicationController
   end
 
   def check_order
+    @reading = Reading.find_by_id(params[:reading_id])
     @submission_ids = params[:ids]
+    
     @id_array = []
-      @reading.paragraph.each do |p| 
+      @reading.paragraphs.each do |p| 
         @id_array.push(p.id)
-        p.sentence.each do |s| 
+        p.sentences.each do |s| 
           @id_array.push(s.id)
           s.phrases.each do |ph|
             @id_array.push(ph.id)
@@ -165,16 +178,24 @@ class ReadingsController < ApplicationController
         end
       end
 
-    @submission_ids.each do |sid|
-      @id_array.each do |kid|
-        if sid == kid 
-          @submission_ids.drop(1)
-        end
+    @array_size = @submission_ids.size
+
+    @out_of_order_ids = []
+    @in_order_ids = []
+    for i in 0..@array_size do
+      if @submission_ids[i] == "#{@id_array[i]}"
+        @in_order_ids.push(@submission_ids[i])
+      else
+        @out_of_order_ids.push(@submission_ids[i])
       end
     end 
 
-    @out_of_order_ids = @submission_ids
+    @ids = []
+    @ids = @ids.push(@out_of_order_ids) 
+    @ids = @ids.push(@in_order_ids)
     
+    return @ids
+
     respond_to do |format|
       format.html { redirect_to :back }
       format.js 

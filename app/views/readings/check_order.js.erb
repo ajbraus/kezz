@@ -1,7 +1,12 @@
-<% if @out_of_order_ids.any? %>
-	<% @out_of_order_ids.each do |oooi| %>
-		$("#<%= oooi %>").effect("highlight", { #CD0000 }, 10000);
+<% if @ids[0].any? %>
+	<% @ids[0].each do |oooi| %>
+		$("#<%= oooi %>").children('u').effect("highlight", { color:"red" }, 10000);
 	<% end %>
-<% else %>
-	$(".getId").effect("highlight", { #0C7908 }, 10000);
+<% end %>
+
+<% if @ids[1].any? %>
+	<% @ids[1].each do |ioid| %>
+		$("#<%= ioid %>").children('u').effect("highlight", { color:"green" }, 40000);
+		//select by name and add background color if right or wrong
+	<% end %>
 <% end %>

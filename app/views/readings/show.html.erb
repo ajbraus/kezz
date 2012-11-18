@@ -34,14 +34,14 @@
 <section class="pSortable reading">
   <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
   <% @paragraphs.each do |p| %>
-    <p id="<%= p.id %>" class="sSortable getId"><span class="phandle">&#182;</span>
+    <p id="<%= p.id %>" class="sSortable getId"><u class="phandle">&#182;</u>
     <% @reading.sentencely? ? @sentences = p.sentences.shuffle : @sentences = p.sentences %>
     <% @sentences.each do |s| %>
-      <span id="<%= s.id %>" class="phSortable getId"><span class="shandle">&#167;</span>
+      <span id="<%= s.id %>" class="phSortable getId"><u class="shandle">&#167;</u>
       <% @reading.phrasely? ? @phrases = s.phrases.shuffle : @phrases = s.phrases %>
       <% @phrases.each do |ph| %>
         <span id="<%= ph.id %>" class="getId">
-          <span class="phhandle">&#186;</span>
+          <u class="phhandle">&#186;</u>
           <span class="phrase"><%= ph.text %></span>
         </span>
       <% end %>
@@ -50,13 +50,19 @@
     </p>
   <% end %>
 </section>
+
+<div class="check_order"><%= link_to "Check Order", check_order_path, id:"checkOrder", title:"#{@reading.id}" %></div>
+
+<div class="bar_graph">
+<% @id_array.each do |id| %>
+  <div class="bar" name="<%= id %>"></div>
+<% end %>
+</div>
+
 <p>
   <b>Rating:</b>
   <%= @reading.rating %>
 </p>
-
-<%= link_to "Check Order", check_order_path %>
-
 <% if user_signed_in? %>
   <% if current_user.id == @reading.library.user_id %>
     <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
