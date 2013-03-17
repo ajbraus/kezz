@@ -1,5 +1,11 @@
 $(document).ready(function() {        
   $('.pSortable').sortable({
+    start: function( event, ui ) {
+      $('body').animate({ zoom: 0.6 }, 300)
+      },
+    stop: function( event, ui ) {
+      $('body').animate({ zoom: 1 }, 300)
+      },
   	placeholder: "pbackdrop",
     handle: '.phandle',
 		items: 'p',

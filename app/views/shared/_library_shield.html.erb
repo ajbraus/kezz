@@ -1,21 +1,22 @@
-<p>
-  <b>Name:</b>
-  <%= library.name %>
-</p>
-<p>
-  <b>Creator:</b>
-  <%= library.creator.name %>
-</p>
-<p>
-  <b>Description:</b>
-  <%= library.description %>
-</p>
-		<ul>
-		  <li><%= link_to 'Show', library %></li>
+<div class="media">
+	<%= link_to library do %>
+    <img class="media-object" src="<%= library.img_url %>"/>
+  <div class="media-body">
+    <h4 class="media-heading"><%= library.name %></h4>
+    <i><%= library.creator.name %></i><br>
+    <%= library.description %>
+	<% end %> 		
+		<div class="pull-right">  
 		  <% if user_signed_in? %>
 		  	<% if current_user = library.creator %>
-		  		<li><%= link_to 'Edit', edit_library_path(library) %></li>
-		  		<li><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+		  		<%= link_to 'Edit', edit_library_path(library), class:"btn btn-warning" %>
+		  		<%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 				<% end %>
 			<% end %>
-		</ul>
+		</div>
+    <!-- Nested media object -->
+<!--     <div class="media">
+      ...
+    </div> -->
+  </div>
+</div>

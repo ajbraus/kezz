@@ -104,45 +104,56 @@ class ReadingsController < ApplicationController
   # PUT /readings/1
   # PUT /readings/1.json
   def update
-    @library = Library.find(params[:library_id])
-    @reading = @library.readings.find(params[:id])
-
+   @library = Library.find(params[:library_id])
+    @reading = @library.readings.build(params[:reading])
     if @reading.save
-      @paragraphs = @reading.content.split(/\n\r/) #split on new line
+      @paragraphs = @reading.content.split(/\n/) #split on new line
       @paragraphs.each do |p| 
-        @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-        if @paragraph.save
-        else
-          respond_to do |format|
-            format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-            format.json { render json: @paragraph.errors, status: :unprocessable_entity }
-          end
-        end
-        @sentences = p.scan /.*?[.!?](?:\s|$)/
-        # reverse.split(/(?=(?:\A|\s+)[.!?])/).map { |ps| ps.reverse }.reverse #split on periods and ?s
-        @sentences.each do |s|
-          @psentence = Paragraph.find_by_id(@paragraph.id)
-          @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
-          if @sentence.save
+        if p.length > 1
+          p.chomp
+          @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
+          if @paragraph.save
           else
             respond_to do |format|
               format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              format.json { render json: @paragraph.errors, status: :unprocessable_entity }
             end
           end
-          @phrases = s.split(/\,|\;|\:|\bnor\b|\bor\b|\, and\b|\(/)
-          @phrases.each do |ph|
-            @sphrase = sentence.find_by_id(@sentence.id)
-            @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
-            if @phrase.save
+          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
+          @sentences.each do |s|
+            @psentence = Paragraph.find_by_id(@paragraph.id)
+            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+            if @sentence.save
             else
               respond_to do |format|
                 format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-                format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              end
+            end
+            @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
+            @phrases.each do |ph|
+              while ph.start_with?(' ') do
+                ph = ph[1..-1]
+              end
+              ph[0] = ph[0].downcase
+              ph.chomp
+              @sphrase = Sentence.find_by_id(@sentence.id)
+              @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
+              if @phrase.save
+              else
+                respond_to do |format|
+                  format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                  format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                end
               end
             end
           end
         end
+      end
+
+      respond_to do |format| 
+        format.html { redirect_to @library, notice: 'Reading was successfully created.' }
+        format.json { render json: @reading, status: :created, location: @reading }
       end
     else
       format.html { render action: "edit" }
@@ -165,34 +176,82 @@ class ReadingsController < ApplicationController
 
   def check_order
     @reading = Reading.find_by_id(params[:reading_id])
-    @submission_ids = params[:ids]
+    @relative_ids = params[:relative_ids] #e.g. {1 => {1 => [1,2,3] }, {2 => [3,4,5] }, {2, => {1 => [6,7,8]}, {2 => [1] } }  
+    @absolute_ids = params[:absolute_ids] #e.g. [1,1,1,2,3,2,4,5,2,1,6]
     
-    @id_array = []
-      @reading.paragraphs.each do |p| 
-        @id_array.push(p.id)
-        p.sentences.each do |s| 
-          @id_array.push(s.id)
-          s.phrases.each do |ph|
-            @id_array.push(ph.id)
+    @relative_order = []
+    @reading.paragraphs.each do |p|
+      @relative_order.push(p.id)
+      @sentence_ids = []
+      p.sentences.each do |s|
+        @sentence_ids.push(s.id)
+        @phrase_ids = []
+        s.phrases.each do |ph|
+          @phrase_ids.push(ph.id)
+        end
+        @sentence_ids.push(@phrase_ids)
+      end
+      @relative_order.push(@sentence_ids)
+    end
+
+    @absolute_order = []
+    @reading.paragraphs.each do |p| 
+      @absolute_order.push(p.id)
+      p.sentences.each do |s| 
+        @absolute_order.push(s.id)
+        s.phrases.each do |ph|
+          @absolute_order.push(ph.id)
+        end
+      end
+    end
+
+    @red_ids = []
+    @green_ids = []
+    for i in 0..@absolute_ids.count do
+      if @absolute_ids[i] == "#{@absolute_order[i]}"
+        @green_ids.push(@absolute_ids[i])
+      else
+        @red_ids.push(@absolute_ids[i])
+      end
+    end
+
+    @yellow_ids = []
+    #ignore relative paragraph order bc only absolute
+    #now find each paragraph in the array
+    @relative_ids.each_pair do |paragraph, sentences|
+      for p in 0..@reading.paragraphs.count
+        @paragraph = Paragraph.find_by_id(paragraph)
+        for s in 0..@paragraph.sentences.count
+          sentences.each_pair do |sentence, phrases|
+            @sentence = Sentence.find_by_id(@relative_order[p+1][s])
+            unless @sentence.blank?
+              if "#{@sentence.id}" == sentence
+                @yellow_ids.push(sentence)
+              end
+              phrases.each do |phrase|
+                for ph in 0..@sentence.phrases.count
+                  @phrase = Phrase.find_by_id(@relative_order[p+1][s+1][ph]) 
+                  unless @phrase.blank?
+                    if "#{@phrase.id}" == phrase
+                      @yellow_ids.push(phrase)
+                    end
+                  end
+                end
+              end
+            end
           end
         end
       end
+    end
+    
+    #remove green_ids from yellow_ids bc their 'more' in order already
+    @yellow_ids = @yellow_ids - @green_ids
 
-    @array_size = @submission_ids.size
-
-    @out_of_order_ids = []
-    @in_order_ids = []
-    for i in 0..@array_size do
-      if @submission_ids[i] == "#{@id_array[i]}"
-        @in_order_ids.push(@submission_ids[i])
-      else
-        @out_of_order_ids.push(@submission_ids[i])
-      end
-    end 
-
+    #return complex array of ids to client:
     @ids = []
-    @ids = @ids.push(@out_of_order_ids) 
-    @ids = @ids.push(@in_order_ids)
+    @ids = @ids.push(@red_ids) 
+    @ids = @ids.push(@yellow_ids)
+    @ids = @ids.push(@green_ids)
     
     return @ids
 

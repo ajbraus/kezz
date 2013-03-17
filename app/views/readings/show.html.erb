@@ -1,6 +1,25 @@
+<div class="span3 pull-right">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">sidebar</li>
+      <li>
+        <b>Rating:</b>
+        <%= @reading.rating %>
+      </li>
+      <% if user_signed_in? %>
+        <% if current_user.id == @reading.library.user_id %>
+          <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
+        <% end %>
+      <% end %>
+
+      <%= link_to 'Back', library_readings_path %>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->
+
 <p id="notice"><%= notice %></p>
 
-<div class="data">
+<div class="span8">
   <p>
     <b>Title:</b>
     <%= @reading.title %>
@@ -29,18 +48,18 @@
       &#186;
     <% end %>
   </p>
-
+  <div class="pull-left check_order"><%= link_to "Check Order", check_order_path, id:"checkOrder", title:"#{@reading.id}", remote:true %></div>
 </div>
-<section class="pSortable reading">
+<div class="span9 pSortable reading">
   <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
   <% @paragraphs.each do |p| %>
-    <p id="<%= p.id %>" class="sSortable getId"><u class="phandle">&#182;</u>
+    <p id="<%= p.id %>" class="sSortable getId paragraph"><u class="phandle">&#182;</u>
     <% @reading.sentencely? ? @sentences = p.sentences.shuffle : @sentences = p.sentences %>
     <% @sentences.each do |s| %>
-      <span id="<%= s.id %>" class="phSortable getId"><u class="shandle">&#167;</u>
+      <span id="<%= s.id %>" class="phSortable getId sentence"><u class="shandle">&#167;</u>
       <% @reading.phrasely? ? @phrases = s.phrases.shuffle : @phrases = s.phrases %>
       <% @phrases.each do |ph| %>
-        <span id="<%= ph.id %>" class="getId">
+        <span id="<%= ph.id %>" class="getId phrase">
           <u class="phhandle">&#186;</u>
           <span class="phrase"><%= ph.text %></span>
         </span>
@@ -49,25 +68,17 @@
     <% end %>
     </p>
   <% end %>
-</section>
+</div>
 
-<div class="check_order"><%= link_to "Check Order", check_order_path, id:"checkOrder", title:"#{@reading.id}" %></div>
-
-<div class="bar_graph">
+<div class="bar_graph span9">
 <% @id_array.each do |id| %>
   <div class="bar" name="<%= id %>"></div>
 <% end %>
 </div>
-
-<p>
-  <b>Rating:</b>
-  <%= @reading.rating %>
-</p>
-<% if user_signed_in? %>
-  <% if current_user.id == @reading.library.user_id %>
-    <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
-  <% end %>
-<% end %>
-
-<%= link_to 'Back', library_readings_path %>
+<!-- twitter bootstrap progress bar
+<div class="progress">
+  <div class="bar bar-success" style="width: 35%;"></div>
+  <div class="bar bar-warning" style="width: 20%;"></div>
+  <div class="bar bar-danger" style="width: 10%;"></div>
+</div> -->
 

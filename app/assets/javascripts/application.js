@@ -12,6 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.ui.sortable
-//= require jquery.effects.highlight
 //= require_tree .

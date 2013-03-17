@@ -6,7 +6,7 @@
 
 <% if @ids[1].any? %>
 	<% @ids[1].each do |ioid| %>
-		$("#<%= ioid %>").children('u').effect("highlight", { color:"green" }, 40000);
+		$("#<%= ioid %>").children('u').effect("highlight", { color:"green" }, 10000);
 		//select by name and add background color if right or wrong
 	<% end %>
 <% end %>

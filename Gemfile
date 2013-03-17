@@ -12,6 +12,10 @@ gem 'thin'
 #gem 'airbrake'
 #gem 'newrelic_rpm'
 
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails'
+
 group :development, :test do 
 	gem 'faker', '1.0.1'
   gem 'rspec-rails'

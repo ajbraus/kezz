@@ -1,4 +1,13 @@
-<div class="data">
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">sidebar</li>
+      <li><%= link_to "Link1", "/path1"  %></li>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->
+
+<div class="span9">
 	<p id="notice"><%= notice %></p>
 	<p>
 	  <b>Name:</b>
@@ -14,6 +23,7 @@
 	</p>
 </div>
 <section>
+	<div class="span9">
 <% if @readings %>
 	<h2>Here are your delightful Readings</h2>
 	<% @readings.each do |r| %>
@@ -25,12 +35,12 @@
 			</li>
 		</ul>
 	<% end %>
-
 <% else %>
 	<h2>Whoomp! Whoomp! You have no Readings</h2>
 <% end %>
+</div>
 
-<p><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn" %></p>
+<div><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn" %></div>
 
 <%= link_to 'Edit', edit_library_path(@library) %> |
 <%= link_to 'Back', libraries_path %>

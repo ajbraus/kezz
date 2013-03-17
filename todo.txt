@@ -1,19 +1,27 @@
-
 check 'em button
-	pass the id's of the elements as an array and check it against the array of the goods.
 
-	need to $.post the data to the check_order method when they click the button
+line 217 of readings_controller
+
+JSON append instead of .push ?
+
+	ALMOST GOT IT!!!
+		open up check_ids.js.coffee and get to work making a complex hash.
 
 	highlight effect is not a border glow
 
 	need if no errors button in the controller to count one kezz read.
 
+	make the boxes at the bottom show the progress
+
 --------------------------------------------------------------
 
 upcase beginnings of sentences in js
 	found selector for this but don't know how to upcase the text 
-		on load and 
-		change in phase order
+		on load upcase the character and on all the sortable() update methods do it again.
+
+leave periods at the end of every sentence dispite its phrase order
+
+make sample_data work . . . create model method that creates all the paragraphs, sentences, and phrases, then call it from the rake task.
 
 --------------------------------------------------------------
 

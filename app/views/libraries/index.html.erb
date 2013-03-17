@@ -1,11 +1,20 @@
+<div class="span3">
+  <div class="well well-large sidebar-nav">
+    <ul class="nav nav-list">
+      <li class="nav-header">sidebar</li>
+      <li><%= link_to "Link1", "/path1"  %></li>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->
+
 <% if user_signed_in? %>
-	<div class="personal">
+	<div class="span6 offset1">
 		<h2> Welcome, <%= current_user.name %> </h2>
 	<%= link_to  "Create New Library", new_library_path, class: "btn" %>
 	</div>
 <% end %>
 
-<div class="browse">
+<div class="span6 offset4">
 	<% @libraries.each do |l| %>
 		<%= render partial: 'shared/library_shield', locals: { :library => l } %>
 	<% end %>
