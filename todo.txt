@@ -1,17 +1,8 @@
-check 'em button
+fix yellow order - not perfect
 
-line 217 of readings_controller
+show placeholder highlight
 
-JSON append instead of .push ?
-
-	ALMOST GOT IT!!!
-		open up check_ids.js.coffee and get to work making a complex hash.
-
-	highlight effect is not a border glow
-
-	need if no errors button in the controller to count one kezz read.
-
-	make the boxes at the bottom show the progress
+Make boxes show progress stacked
 
 --------------------------------------------------------------
 
