@@ -1,4 +1,5 @@
-<%= form_for @reading, url: library_readings_path  do |f| %>
+<div class="span9">
+<%= form_for @reading, url: library_readings_path, class:"form-horizontal"  do |f| %>
   <% if @reading.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@reading.errors.count, "error") %> prohibited this reading from being saved:</h2>
@@ -10,29 +11,22 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :author, "Original Author" %><br />
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
-    <%= f.label :summary %><br />
-    <%= f.text_area :summary %>
-  </div>
-  <div class="checkboxes">
-    <%= f.check_box :phrasely, checked: true %> <%= f.label :phrasely, raw("&#182;") %>
-    <%= f.check_box :sentencely, checked: true %> <%= f.label :sentencely, raw("&#167;") %>
-    <%= f.check_box :paragraphly, checked: true %> <%= f.label :paragraphly, raw("&#186;") %>
-  </div>
-  <div class="field">
-    <%= f.label :content, "Text" %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <legend>New Reading</legend>
+    <%= f.label :title, "Title*", class:"control-label" %>
+    <%= f.text_field :title, class:"input-xxlarge" %>
+    <%= f.label :source, "Source*" %>
+    <%= f.text_field :source, class:"input-xxlarge" %>
+    <%= f.label :author, "Original Author*" %>
+    <%= f.text_field :author, class:"input-xxlarge" %>
+    <%= f.label :summary %>
+    <%= f.text_area :summary, class:"input-xxlarge summary" %>
+    <legend>scramble*</legend>
+    <%= f.check_box :phrasely, checked: true %>  <%= f.label :phrasely, raw("&#182; paragraphly"), class:'checkbox inline' %> 
+    <%= f.check_box :sentencely, checked: true %> <%= f.label :sentencely, raw("&#167; sentencely"), class:'checkbox inline' %>
+    <%= f.check_box :paragraphly, checked: true %> <%= f.label :paragraphly, raw("&#186; phrasely"), class:'checkbox inline' %>
+    <hr>
+    <%= f.label :content, "Text*" %>
+    <%= f.text_area :content, class:"input-xxlarge"  %>
+    <%= f.submit class:"btn btn-primary" %>
 <% end %>
+</div>
