@@ -6,8 +6,7 @@
         <b>Rating:</b>
         <%= @reading.rating %>
       </li>
-
-      <%= link_to 'Stop', @reading.library %>
+      <%= link_to 'Stop', library_path(@reading.library) %>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->

@@ -21,55 +21,51 @@
 	  <dd class="muted"><%= @library.description %></dd>
 	</dl>
 </div>
-	<div class="span11">
-<% if @readings %>
-	<% @readings.each_with_index do |r, index| %>
-		<table class="table table-hover">
-  		<thead>
-	  		<tr>
-	  			<th>No.</th>
-	  			<th>Reading Title</th>
-	  			<th>Source</th>
-	  			<th>Author</th>
-	  			<th>Summary</th>
-	  			<th>Rating</th>
-	  		<tr>
-	  	</thead>
-	  	<tbody>
-	  		<tr>
-	  			<td>
-	  				<%= index + 1 %>
-	  			</td>
-	  			<td>
-	  				<%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
-					</td>		
+<div class="span11">
+<% @readings.each_with_index do |r, index| %>
+	<table class="table table-hover">
+		<thead>
+  		<tr>
+  			<th>No.</th>
+  			<th>Reading Title</th>
+  			<th>Source</th>
+  			<th>Author</th>
+  			<th>Summary</th>
+  			<th>Rating</th>
+  		<tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>
+  				<%= index + 1 %>
+  			</td>
+  			<td>
+  				<%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
+				</td>		
+				<td>
+					<%= r.source %>
+				</td>
+				<td>
+					<%= r.author %>
+				</td>
+				<td class="muted">
+					<%= r.summary %>
+				</td>
+				<td>
+					<%= r.rating %>
+				</td>
+				<% if current_user == @library.creator %>
 					<td>
-						<%= r.source %>
+        		<%= link_to 'Edit', edit_library_reading_path(@library) %> |
 					</td>
 					<td>
-						<%= r.author %>
+						<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
 					</td>
-					<td class="muted">
-						<%= r.summary %>
-					</td>
-					<td>
-						<%= r.rating %>
-					</td>
-					<% if current_user == @library.creator %>
-						<td>
-          		<%= link_to 'Edit', edit_library_reading_path(@reading) %> |
-						</td>
-						<td>
-							<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
-						</td>
-					<% end %>
-				</tr>
-			<tbody>
-		</table>
-	<% end %>
-<% else %>
-	<h2>Whoomp! Whoomp! You have no Readings</h2>
+				<% end %>
+			</tr>
+		<tbody>
+	</table>
 <% end %>
 </div>
 
-<div class="span3"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn" %></div>
+<div class="span3"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary" %></div>
