@@ -2,7 +2,9 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">sidebar</li>
-      <li><%= link_to 'Edit', edit_library_path(@library) %> </li>
+      <% if user_signed_in? %>
+      	<li><%= link_to 'Edit', edit_library_path(@library) %> </li>
+      <% end %>
 			<li><%= link_to 'Back', libraries_path %></li>
     </ul>
   </div><!--/.well -->
@@ -54,6 +56,9 @@
 						<%= r.rating %>
 					</td>
 					<% if current_user == @library.creator %>
+						<td>
+          		<%= link_to 'Edit', edit_library_reading_path(@reading) %> |
+						</td>
 						<td>
 							<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
 						</td>

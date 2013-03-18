@@ -1,5 +1,5 @@
 <div class="span9">
-<%= form_for @reading, url: library_readings_path, class:"form-horizontal"  do |f| %>
+<%= form_for ([@reading.library, @reading]), url: library_reading_path, class:"form-horizontal"  do |f| %>
   <% if @reading.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@reading.errors.count, "error") %> prohibited this reading from being saved:</h2>
@@ -11,7 +11,6 @@
       </ul>
     </div>
   <% end %>
-    <legend>New Reading</legend>
     <%= f.label :title, "Title*", class:"control-label" %>
     <%= f.text_field :title, class:"input-xxlarge" %>
     <%= f.label :source, "Source*" %>

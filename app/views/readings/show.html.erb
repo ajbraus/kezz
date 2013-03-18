@@ -1,18 +1,13 @@
 <div class="span3 pull-right">
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">sidebar</li>
+      <li class="nav-header"></li>
       <li>
         <b>Rating:</b>
         <%= @reading.rating %>
       </li>
-      <% if user_signed_in? %>
-        <% if current_user.id == @reading.library.user_id %>
-          <%= link_to 'Edit', edit_library_reading_path(@reading) %> |
-        <% end %>
-      <% end %>
 
-      <%= link_to 'Back', library_readings_path %>
+      <%= link_to 'Stop', @reading.library %>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->
@@ -42,13 +37,13 @@
       <% end %>
     </dd>
   </dl>
-  <div class="pull-left check_order"><%= link_to "Check Order", check_order_path, id:"checkOrder", title:"#{@reading.id}", remote:true %></div>
+  <div class="pull-left check_order"><%= link_to "Check Order", check_order_path, class:"check_order", title:"#{@reading.id}", remote:true %></div>
 </div>
 
-<div class="fiero span9 text-center pull-left alert alert-info">
+<div class="fiero span9 text-center pull-left alert alert-info" style="display:none;">
   <h2>You DID IT! +25 points!</h2>
 </div>
-<div class="fiero span1 pull-right">
+<div class="fiero span1 pull-right" style="display:none;">
 <h3>yay!</h3>
 </div>
 
@@ -77,6 +72,8 @@
   <div class="bar" name="<%= id %>"></div>
 <% end %>
 </div>
+
+<div class="span12 check_order"><%= link_to "Check Order", check_order_path, class:"check_order", title:"#{@reading.id}", remote:true %></div>
 <!-- twitter bootstrap progress bar
 <div class="progress">
   <div class="bar bar-success" style="width: 35%;"></div>

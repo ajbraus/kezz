@@ -142,7 +142,7 @@ class ReadingsController < ApplicationController
               if @phrase.save
               else
                 respond_to do |format|
-                  format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                  format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
                   format.json { render json: @phrase.errors, status: :unprocessable_entity }
                 end
               end
@@ -152,11 +152,11 @@ class ReadingsController < ApplicationController
       end
 
       respond_to do |format| 
-        format.html { redirect_to @library, notice: 'Reading was successfully created.' }
+        format.html { redirect_to library_path(@library), notice: 'Reading was successfully created.' }
         format.json { render json: @reading, status: :created, location: @reading }
       end
     else
-      format.html { render action: "edit" }
+      format.html { render action: "edit", notice: 'There was an error. Reading not updated.' }
       format.json { render json: @reading.errors, status: :unprocessable_entity }
     end
   end

@@ -8,6 +8,8 @@ show 'half way there' and 'big wins' '+4' or +5, -4
 
 show timer - stop timer when complete
 
+add validations
+
 --------------------------------------------------------------
 
 upcase beginnings of sentences in js

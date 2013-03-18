@@ -2,6 +2,10 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
+    if user_signed_in?
+      @my_libraries = current_user.libraries.limit(5)
+      @my_readings = Reading.limit(5)
+    end
     @libraries = Library.all
     @pop_libraries = Library.limit(5)
     @pop_readings = Reading.limit(5)

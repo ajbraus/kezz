@@ -79,3 +79,9 @@ p.pbackdrop {
 	background-color: yellow;
 	display: inline-block;
 }
+
+.thumbnail {
+	&:hover {
+		text-decoration:none;
+	}
+}

@@ -1,9 +1,8 @@
-<div class="thumbnail">
-	<%= link_to library do %>
-    <img class="media-object" src="<%= library.img_url %>"/>
-    <div class="caption">
-	    <h3><%= library.name %></h3>
-	    <% end %> 	
-	    <p><%= library.creator.name %><p>
-	    <p><%= library.description %></p>
-	  </div>    	
+<%= link_to library, class:"thumbnail" do %>
+  <img class="media-object" src="<%= library.img_url %>"/>
+	<div class="caption">
+		<h3><%= library.name %></h3>
+  	<b>by</b> <%= library.creator.name %><br>
+		<b>Description</b> <%= library.description %>
+	</div>
+<% end %> 	

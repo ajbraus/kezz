@@ -1,6 +1,6 @@
 # submit ids when click on the check order button
 $ ->
-	$("#checkOrder").click (e) ->
+	$(".check_order").click (e) ->
 		e.preventDefault();
 
 		reading_id = $(@).attr('title');

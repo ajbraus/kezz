@@ -9,7 +9,8 @@ class Reading < ActiveRecord::Base
   								:title, 
   								:paragraphly, 
   								:sentencely,
-  								:phrasely
+  								:phrasely,
+                  :source
 
   validates :author, :content, :title, presence: true
 
