@@ -87,6 +87,7 @@ class ReadingsController < ApplicationController
             end
           end
         end
+      end
       respond_to do |format| 
         format.html { redirect_to @library, notice: 'Reading was successfully created.' }
         format.json { render json: @reading, status: :created, location: @reading }
