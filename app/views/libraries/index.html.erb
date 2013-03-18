@@ -1,10 +1,35 @@
-<div class="row pitch">
+<div class="row">
 <% if user_signed_in? %>
-	<div class="span5 offset2">
-		<h2> Welcome, <%= current_user.name %> </h2>
+<div class="span3 pull-right"><%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>	</div>
+<h3 class="offset1">Welcome<%= current_user.sign_in_count > 1 ? ' back' : '' %>, <%= current_user.first_name %><h3>
+	<h4 class="offset1">in progress</h4>
+	<div class="span5 offset1">
+		<h5>Libraries</h5>
+		<table class="table table-hover">
+			<tbody>
+				<% @pop_libraries.each do |l| %>
+				<tr>
+					<td>
+						<%= link_to library_path(l) do %><%= l.name %><% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
 	<div class="span5">
-		<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>
+		<h5>Readings</h5>
+		<table class="table table-hover">
+			<tbody>
+				<% @pop_readings.each do |r| %>
+				<tr>
+					<td>
+						<%= link_to library_reading_path(r.library, r) do %><%= r.title %><% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
 <% else %>
 	<div class="span5 offset2">

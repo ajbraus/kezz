@@ -6,6 +6,12 @@
 	<% @libraries.each do |l| %>
 	 	<li class="span3">
 			<%= render partial: 'shared/library_shield', locals: { :library => l } %>
+			<% if user_signed_in? %>
+	  		<% if current_user = l.creator %>
+	  			<%= link_to 'Edit', edit_library_path(l), class:"btn btn-warning" %> 
+	  			<%= link_to 'Destroy', l, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+	  		<% end %>
+			<% end %>
 		</li>
 	<% end %>
 </ul>

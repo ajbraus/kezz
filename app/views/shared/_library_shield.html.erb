@@ -6,12 +6,4 @@
 	    <% end %> 	
 	    <p><%= library.creator.name %><p>
 	    <p><%= library.description %></p>
-	    <p>
-	    	<% if user_signed_in? %>
-		  		<% if current_user = library.creator %>
-		  			<%= link_to 'Edit', edit_library_path(library), class:"btn btn-warning" %> 
-		  			<%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
-		  		<% end %>
-			<% end %>
-			<p>
 	  </div>    	
