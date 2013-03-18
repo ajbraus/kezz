@@ -45,49 +45,48 @@ class ReadingsController < ApplicationController
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
     @paragraphs = @reading.content.split(/\n/) #split on new line
-    @paragraphs.each do |p| 
-      if p.length > 1
-        p.chomp
-        @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-        if @paragraph.save
-        else
-          respond_to do |format|
-            format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-            format.json { render json: @paragraph.errors, status: :unprocessable_entity }
-          end
-        end
-        @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
-        @sentences.each do |s|
-          @psentence = Paragraph.find_by_id(@paragraph.id)
-          @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
-          if @sentence.save
+    if @reading.save
+      @paragraphs.each do |p| 
+        if p.length > 1
+          p.chomp
+          @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
+          if @paragraph.save
           else
             respond_to do |format|
               format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              format.json { render json: @paragraph.errors, status: :unprocessable_entity }
             end
           end
-          @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
-          @phrases.each do |ph|
-            while ph.start_with?(' ') do
-              ph = ph[1..-1]
-            end
-            ph[0] = ph[0].downcase
-            ph.chomp
-            @sphrase = Sentence.find_by_id(@sentence.id)
-            @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
-            if @phrase.save
+          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
+          @sentences.each do |s|
+            @psentence = Paragraph.find_by_id(@paragraph.id)
+            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+            if @sentence.save
             else
               respond_to do |format|
                 format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-                format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                format.json { render json: @sentence.errors, status: :unprocessable_entity }
+              end
+            end
+            @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
+            @phrases.each do |ph|
+              while ph.start_with?(' ') do
+                ph = ph[1..-1]
+              end
+              ph[0] = ph[0].downcase
+              ph.chomp
+              @sphrase = Sentence.find_by_id(@sentence.id)
+              @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
+              if @phrase.save
+              else
+                respond_to do |format|
+                  format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                  format.json { render json: @phrase.errors, status: :unprocessable_entity }
+                end
               end
             end
           end
         end
-      end
-    end
-    if @reading.save
       respond_to do |format| 
         format.html { redirect_to @library, notice: 'Reading was successfully created.' }
         format.json { render json: @reading, status: :created, location: @reading }
