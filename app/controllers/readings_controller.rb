@@ -86,6 +86,7 @@ class ReadingsController < ApplicationController
           end
         end
       end
+    end
     if @reading.save
       respond_to do |format| 
         format.html { redirect_to @library, notice: 'Reading was successfully created.' }
