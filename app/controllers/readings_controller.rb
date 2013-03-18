@@ -36,7 +36,8 @@ class ReadingsController < ApplicationController
 
   # GET /readings/1/edit
   def edit
-    @reading = Reading.find(params[:id])
+    @library = Library.find(params[:library_id])
+    @reading = @library.readings.find(params[:id])
   end
 
   # POST /readings
@@ -245,6 +246,7 @@ class ReadingsController < ApplicationController
     
     #remove green_ids from yellow_ids bc their 'more' in order already
     @yellow_ids = @yellow_ids - @green_ids
+    @red_ids = @red_ids - @yellow_ids
 
     #return complex array of ids to client:
     @ids = []

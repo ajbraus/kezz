@@ -56,7 +56,7 @@
 				</td>
 				<% if current_user == @library.creator %>
 					<td>
-        		<%= link_to 'Edit', edit_library_reading_path(@library) %> |
+        		<%= link_to 'Edit', edit_library_reading_path(@library, r) %>
 					</td>
 					<td>
 						<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>

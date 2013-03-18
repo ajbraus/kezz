@@ -2,7 +2,8 @@
   <img class="media-object" src="<%= library.img_url %>"/>
 	<div class="caption">
 		<h3><%= library.name %></h3>
+		<b><%= library.readings.count %> readings</b> </br>
   	<b>by</b> <%= library.creator.name %><br>
-		<b>Description</b> <%= library.description %>
+		<b>Description</b> <%= library.description %><br>
 	</div>
 <% end %> 	
