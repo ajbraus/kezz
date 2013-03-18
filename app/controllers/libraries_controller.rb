@@ -3,6 +3,8 @@ class LibrariesController < ApplicationController
   # GET /libraries.json
   def index
     @libraries = Library.all
+    @pop_libraries = Library.limit(5)
+    @pop_readings = Reading.limit(5)
 
     respond_to do |format|
       format.html # index.html.erb

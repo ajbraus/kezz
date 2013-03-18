@@ -1,14 +1,60 @@
+<div class="row pitch">
 <% if user_signed_in? %>
-	<div class="span6 offset1">
+	<div class="span5 offset2">
 		<h2> Welcome, <%= current_user.name %> </h2>
-	<%= link_to  "Create New Library", new_library_path, class: "btn" %>
+	</div>
+	<div class="span5">
+		<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>
+	</div>
+<% else %>
+	<div class="span5 offset2">
+		<h2> Welcome to kezz </h2>
+	</div>
+	<div class="span5">
+		Video
 	</div>
 <% end %>
+</div>
+<hr>
+<div class="row">
+	<h4 class="offset1">Trending</h4>
+	<div class="span5 offset1">
+		<h5>Libraries</h5>
+		<table class="table table-hover">
+			<tbody>
+				<% @pop_libraries.each do |l| %>
+				<tr>
+					<td>
+						<%= l.name %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<div class="span5">
+		<h5>Readings</h5>
+		<table class="table table-hover">
+			<tbody>
+				<% @pop_readings.each do |l| %>
+				<tr>
+					<td>
+						<%= l.title %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
 
+<div class="span12">
+	<h4>Recent Libraries</h4>
 <ul class="thumbnails">
 	<% @libraries.each do |l| %>
-	 	<li class="span4">
+	 	<li class="span3">
 			<%= render partial: 'shared/library_shield', locals: { :library => l } %>
 		</li>
 	<% end %>
 </ul>
+</div>
