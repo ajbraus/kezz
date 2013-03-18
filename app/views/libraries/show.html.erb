@@ -67,5 +67,6 @@
 		<tbody>
 	</table>
 </div>
-
+<% if user_signed_in? %>
 <div class="span3"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary" %></div>
+<% end %>
