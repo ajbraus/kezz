@@ -1,6 +1,6 @@
 body {
-	font-size: 16px;
-line-height: 24px;
+font-size: 18px;
+line-height: 27px;
 }
 
 .navbar .nav {
@@ -25,11 +25,11 @@ width:100%;
 }
 
 .bar {
-	width: 16px;
+width: 19px;
 background: lightgrey;
-height: 24px;
-float:left;
-margin-left:2px;
+height: 15px;
+float: left;
+margin-left: 2px;
 margin-top: 2px;
 border-radius: 4px;
 }
@@ -51,4 +51,31 @@ textarea.summary {
 		margin: 0 auto;
 		max-height: 200px;
 	}
+}
+
+
+.phhandle, .phandle, .shandle {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+p.pbackdrop {
+	width:100%;
+	height:120px;
+	background-color: blue;
+}
+
+.sbackdrop {
+	width:100%;
+	height:60px;
+	background-color: purple;
+	display: block;
+}
+
+
+.phbackdrop {
+	width:50px;
+	height:16px;
+	background-color: yellow;
+	display: inline-block;
 }

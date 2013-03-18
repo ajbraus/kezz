@@ -20,37 +20,39 @@
 <p id="notice"><%= notice %></p>
 
 <div class="span8">
-  <p>
-    <b>Title:</b>
-    <%= @reading.title %>
-  </p>
-  <p>
-    <b>Library:</b>
-    <%= @reading.library.name %>
-  </p>
-  <p>
-  <b>Author:</b>
-    <%= @reading.author %>
-  </p>
-  <p>
-    <b>Summary:</b>
-    <%= @reading.summary %>
-  </p>
-  <p>
-    <b>Type:</b>
-    <% if @reading.paragraphly? %>
-      &#182;
-    <% end %>
-    <% if @reading.sentencely? %>
-      &#167;
-    <% end %>
-    <% if @reading.phrasely? %>
-      &#186;
-    <% end %>
-  </p>
+    <dl class="dl-horizontal">
+    <dt>Title</dt>
+    <dd><%= @reading.title %></dd>
+    <dt>Library</dt>
+    <dd><%= @reading.library.name %></dd>
+    <dt>Author</dt>
+    <dd><%= @reading.author %></dd>
+    <dt>Summary</dt>
+    <dd class="muted"><%= @reading.summary %></dd>
+    <dt>Type:</dt>
+    <dd>
+      <% if @reading.paragraphly? %>
+        &#182;
+      <% end %>
+      <% if @reading.sentencely? %>
+        &#167;
+      <% end %>
+      <% if @reading.phrasely? %>
+        &#186;
+      <% end %>
+    </dd>
+  </dl>
   <div class="pull-left check_order"><%= link_to "Check Order", check_order_path, id:"checkOrder", title:"#{@reading.id}", remote:true %></div>
 </div>
-<div class="span9 pSortable reading">
+
+<div class="fiero span9 text-center pull-left alert alert-info">
+  <h2>You DID IT! +25 points!</h2>
+</div>
+<div class="fiero span1 pull-right">
+<h3>yay!</h3>
+</div>
+
+<div class="span10 pull-left pSortable reading">
   <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
   <% @paragraphs.each do |p| %>
     <p id="<%= p.id %>" class="sSortable getId paragraph"><u class="phandle">&#182;</u>
@@ -70,7 +72,7 @@
   <% end %>
 </div>
 
-<div class="bar_graph span9">
+<div class="bar_graph span1 pull-right">
 <% @id_array.each do |id| %>
   <div class="bar" name="<%= id %>"></div>
 <% end %>

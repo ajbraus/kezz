@@ -9,8 +9,8 @@
 <% if @ids[1].any? %>
 	<% @ids[1].each do |yellow| %>
 		//$("#<%= yellow %>").children('u').effect("highlight", { color:"yellow" }, 10000);
-		$("#<%= yellow %>").children('u').css("background", "yellow");
-		$(".bar[name='<%= yellow %>']").css("background", "yellow");
+		$("#<%= yellow %>").children('u').css("background", "orange");
+		$(".bar[name='<%= yellow %>']").css("background", "orange");
 	<% end %>
 <% end %>
 
@@ -20,4 +20,8 @@
 		$("#<%= green %>").children('u').css("background", "green");
 		$(".bar[name='<%= green %>']").css("background", "green");
 	<% end %>
+<% end %>
+
+<% if @ids[0].none? && @ids[1].none? %>
+	$('#fiero').show();
 <% end %>

@@ -252,7 +252,7 @@ class ReadingsController < ApplicationController
     @ids = @ids.push(@red_ids) 
     @ids = @ids.push(@yellow_ids)
     @ids = @ids.push(@green_ids)
-    
+
     return @ids
 
     respond_to do |format|
