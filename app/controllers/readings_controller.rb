@@ -104,9 +104,11 @@ class ReadingsController < ApplicationController
   # PUT /readings/1
   # PUT /readings/1.json
   def update
-   @library = Library.find(params[:library_id])
-    @reading = @library.readings.build(params[:reading])
-    if @reading.save
+    @reading = Reading.find_by_id(params[:id])
+    @library = @reading.library
+    @reading.paragraphs.each { |p| p.destroy }
+
+    if @reading.update_attributes(params[:reading])
       @paragraphs = @reading.content.split(/\n/) #split on new line
       @paragraphs.each do |p| 
         if p.length > 1
@@ -115,7 +117,7 @@ class ReadingsController < ApplicationController
           if @paragraph.save
           else
             respond_to do |format|
-              format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+              format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
               format.json { render json: @paragraph.errors, status: :unprocessable_entity }
             end
           end
@@ -126,7 +128,7 @@ class ReadingsController < ApplicationController
             if @sentence.save
             else
               respond_to do |format|
-                format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+                format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
                 format.json { render json: @sentence.errors, status: :unprocessable_entity }
               end
             end
@@ -218,22 +220,22 @@ class ReadingsController < ApplicationController
     @yellow_ids = []
     #ignore relative paragraph order bc only absolute
     #now find each paragraph in the array
-    @relative_ids.each_pair do |paragraph, sentences|
+    @relative_ids.each_pair do |paragraph_id, sentences|
       for p in 0..@reading.paragraphs.count
-        @paragraph = Paragraph.find_by_id(paragraph)
+        @paragraph = Paragraph.find_by_id(paragraph_id)
         for s in 0..@paragraph.sentences.count
-          sentences.each_pair do |sentence, phrases|
+          sentences.each_pair do |sentence_id, phrases|
             @sentence = Sentence.find_by_id(@relative_order[p+1][s])
             unless @sentence.blank?
-              if "#{@sentence.id}" == sentence
-                @yellow_ids.push(sentence)
+              if "#{@sentence.id}" == sentence_id
+                @yellow_ids.push(sentence_id)
               end
-              phrases.each do |phrase|
+              phrases.each do |phrase_id|
                 for ph in 0..@sentence.phrases.count
                   @phrase = Phrase.find_by_id(@relative_order[p+1][s+1][ph]) 
                   unless @phrase.blank?
-                    if "#{@phrase.id}" == phrase
-                      @yellow_ids.push(phrase)
+                    if "#{@phrase.id}" == phrase_id
+                      @yellow_ids.push(phrase_id)
                     end
                   end
                 end

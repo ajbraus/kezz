@@ -34,7 +34,7 @@
       <% end %>
     </dd>
   </dl>
-  <div class="pull-left check_order"><%= link_to "Check Order", check_order_path, class:"check_order", title:"#{@reading.id}", remote:true %></div>
+  <div class="pull-left check_order"><a class="check_order" title="<%= @reading.id %>">Check Order</a></div>
 </div>
 
 <div class="fiero span9 text-center pull-left alert alert-info" style="display:none;">
@@ -70,7 +70,7 @@
 <% end %>
 </div>
 
-<div class="span12 check_order"><%= link_to "Check Order", check_order_path, class:"check_order", title:"#{@reading.id}", remote:true %></div>
+<div class="pull-left check_order"><a class="check_order" title="<%= @reading.id %>">Check Order</a></div>
 <!-- twitter bootstrap progress bar
 <div class="progress">
   <div class="bar bar-success" style="width: 35%;"></div>
