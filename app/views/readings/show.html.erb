@@ -3,15 +3,22 @@
     <ul class="nav nav-list">
       <li class="nav-header"></li>
       <li>
+        <h3><span id="points">0</span> Points</h3>
+      </li>
+      <% if false %>
+      <li>
         <b>Rating:</b>
         <%= @reading.rating %>
       </li>
-      <%= link_to 'Stop', library_path(@reading.library) %>
+      <% end %>
+      <li>
+        <%= link_to 'Stop', library_path(@reading.library), class:'pull-left' %> | Save
+      </li>
     </ul>
   </div><!--/.well -->
 </div><!--/span-->
 
-<div class="span8">
+<div class="span8 pull-left">
     <dl class="dl-horizontal">
     <dt>Title</dt>
     <dd><%= @reading.title %></dd>
@@ -70,7 +77,9 @@
 <% end %>
 </div>
 
-<div class="pull-left check_order"><a class="check_order" title="<%= @reading.id %>">Check Order</a></div>
+<div class="span8">
+  <div class="clear-both check_order"><a class="check_order" title="<%= @reading.id %>">Check Order</a></div>
+</div>
 <!-- twitter bootstrap progress bar
 <div class="progress">
   <div class="bar bar-success" style="width: 35%;"></div>

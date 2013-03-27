@@ -1,34 +1,24 @@
-<div class="navbar navbar-fluid-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="/">Kezz</a>
-      <div class="container-fluid nav-collapse">
-        <ul class="nav">
-          <% if !user_signed_in? %>
-            <li>
-            <%= link_to('Login', new_user_session_path)  %>  
-            </li>
-            <li>
-            <%= link_to('Register', new_user_registration_path)  %>
-            </li>
-          <% else %> 
-            <li>
-              <%= link_to "Libraries", profile_path %>
-            </li>
-            <li>
-              <%= link_to('User Settings', edit_user_registration_path) %>
-            </li>
-            <li>
-              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   
-            </li>
-          <% end %>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
+<div class="navbar">
+  <a class="logo" href="/"><%= image_tag 'kezz_logo.png' %></a>
+    <ul class="nav pull-right">
+      <% if !user_signed_in? %>
+        <li>
+        <%= link_to('Login', new_user_session_path)  %>  
+        </li>
+        <li>
+        <%= link_to('Register', new_user_registration_path)  %>
+        </li>
+      <% else %> 
+        <li>
+          <%= link_to "Libraries", profile_path %>
+        </li>
+        <li>
+          <%= link_to('Settings', edit_user_registration_path) %>
+        </li>
+        <li>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   
+        </li>
+      <% end %>
+    </ul>
 </div>
+<hr>

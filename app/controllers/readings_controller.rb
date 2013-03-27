@@ -74,7 +74,7 @@ class ReadingsController < ApplicationController
               while ph.start_with?(' ') do
                 ph = ph[1..-1]
               end
-              ph[0] = ph[0].downcase
+              #ph[0] = ph[0].downcase
               ph.chomp
               @sphrase = Sentence.find_by_id(@sentence.id)
               @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
@@ -137,7 +137,7 @@ class ReadingsController < ApplicationController
               while ph.start_with?(' ') do
                 ph = ph[1..-1]
               end
-              ph[0] = ph[0].downcase
+              #ph[0] = ph[0].downcase
               ph.chomp
               @sphrase = Sentence.find_by_id(@sentence.id)
               @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
@@ -248,7 +248,7 @@ class ReadingsController < ApplicationController
     
     #remove green_ids from yellow_ids bc their 'more' in order already
     @yellow_ids = @yellow_ids - @green_ids
-    @red_ids = @red_ids - @yellow_ids
+    #@red_ids = @red_ids - @yellow_ids
 
     #return complex array of ids to client:
     @ids = []

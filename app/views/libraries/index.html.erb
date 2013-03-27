@@ -1,35 +1,13 @@
-<div class="row">
 <% if user_signed_in? %>
-<div class="span3 pull-right"><%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>	</div>
-<h3 class="offset1">Welcome<%= current_user.sign_in_count > 1 ? ' back' : '' %>, <%= current_user.first_name %><h3>
-	<h4 class="offset1">in progress</h4>
-	<div class="span5 offset1">
-		<h5>Libraries</h5>
-		<table class="table table-hover">
-			<tbody>
-				<% @my_libraries.each do |l| %>
-				<tr>
-					<td>
-						<%= link_to library_path(l) do %><%= l.name %><% end %>
-					</td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
+	<div class="span3 pull-right">
+		<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>	
 	</div>
-	<div class="span5">
-		<h5>Readings</h5>
-		<table class="table table-hover">
-			<tbody>
-				<% @my_readings.each do |r| %>
-				<tr>
-					<td>
-						<%= link_to library_reading_path(r.library, r) do %><%= r.title %><% end %>
-					</td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
+	<h3 class="offset1">Welcome<%= current_user.sign_in_count > 1 ? ' back' : '' %>, <%= current_user.first_name %><h3>
+	<hr>
+
+	<div class="span12">
+		<h4>In Progress</h4>
+		<%= render partial: 'shared/thumbnails', locals: { :array => @in_progress_libraries } %>
 	</div>
 <% else %>
 	<div class="span5 offset2">
@@ -39,47 +17,13 @@
 		Video
 	</div>
 <% end %>
+<hr>
+<div class="span12">
+	<h4>Trending</h4>
+	<%= render partial: 'shared/thumbnails', locals: { :array => @trending_libraries } %>
 </div>
 <hr>
-<div class="row">
-	<h4 class="offset1">Trending</h4>
-	<div class="span5 offset1">
-		<h5>Libraries</h5>
-		<table class="table table-hover">
-			<tbody>
-				<% @pop_libraries.each do |l| %>
-				<tr>
-					<td>
-						<%= link_to library_path(l) do %><%= l.name %><% end %>
-					</td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
-	<div class="span5">
-		<h5>Readings</h5>
-		<table class="table table-hover">
-			<tbody>
-				<% @pop_readings.each do |r| %>
-				<tr>
-					<td>
-						<%= link_to library_reading_path(r.library, r) do %><%= r.title %><% end %>
-					</td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
-</div>
-
 <div class="span12">
-	<h4>Recent Libraries</h4>
-<ul class="thumbnails">
-	<% @libraries.each do |l| %>
-	 	<li class="span3">
-			<%= render partial: 'shared/library_shield', locals: { :library => l } %>
-		</li>
-	<% end %>
-</ul>
+	<h4>Recent</h4>
+	<%= render partial: 'shared/thumbnails', locals: { :array => @recent_libraries } %>
 </div>

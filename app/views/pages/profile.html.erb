@@ -1,6 +1,6 @@
-	<%= link_to  "Create New Library", new_library_path, class: "btn" %>
+	<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary pull-right" %>
 <div class="my_libraries">
-<div class="span12">
+<div class="row">
 	<h4>Recent Libraries</h4>
 <ul class="thumbnails">
 	<% @libraries.each do |l| %>
@@ -17,11 +17,9 @@
 </ul>
 </div>
 
-<div class="attempted">
-	Attempted
-	<% if @attempted_readings.empty? %>
-		<h2>You have attempted no Kezz :o( </h2>
-	<% else %>
+<div class="attempted row">
+	<h4>Attempted</h4>
+	<% unless @attempted_readings.empty? %>
 		<h2>completed Kezz</h2>
 			<% @attempted_readings.each do |ck| %>
 				<%= render partial: 'shared/reading_shield', locals: { :kezz => ck } %>
@@ -29,11 +27,9 @@
 	<% end %>
 </div>
 
-<div class="completed">
-	Completed
-	<% if @completed_readings.empty? %>
-		<h2>You have completed no Kezz :o( </h2>
-	<% else %>
+<div class="completed row">
+	<h4>Completed</h4>
+	<% unless @completed_readings.empty? %>
 		<h2>completed Kezz</h2>
 		<% @completed_readings.each do |ck| %>
 			<%= render partial: 'shared/reading_shield', locals: { :kezz => ck } %>

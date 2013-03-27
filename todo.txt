@@ -1,6 +1,6 @@
 fix yellow order - not perfect
 
-make it so the phrase bubbles can't get behind the sentance squiggles (and same w paragraph p's)
+count # of times they checked
 
 show placeholder highlight for s and ph
 
