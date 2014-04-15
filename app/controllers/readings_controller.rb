@@ -60,7 +60,7 @@ class ReadingsController < ApplicationController
           end
           @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
           @sentences.each do |s|
-            @psentence = Paragraph.find_by_id(@paragraph.id)
+            @psentence = Paragraph.find(@paragraph.id)
             @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
             if @sentence.save
             else
@@ -76,7 +76,7 @@ class ReadingsController < ApplicationController
               end
               #ph[0] = ph[0].downcase
               ph.chomp
-              @sphrase = Sentence.find_by_id(@sentence.id)
+              @sphrase = Sentence.find(@sentence.id)
               @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
               if @phrase.save
               else
@@ -104,7 +104,7 @@ class ReadingsController < ApplicationController
   # PUT /readings/1
   # PUT /readings/1.json
   def update
-    @reading = Reading.find_by_id(params[:id])
+    @reading = Reading.find(params[:id])
     @library = @reading.library
     @reading.paragraphs.each { |p| p.destroy }
 
@@ -123,7 +123,7 @@ class ReadingsController < ApplicationController
           end
           @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
           @sentences.each do |s|
-            @psentence = Paragraph.find_by_id(@paragraph.id)
+            @psentence = Paragraph.find(@paragraph.id)
             @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
             if @sentence.save
             else
@@ -139,7 +139,7 @@ class ReadingsController < ApplicationController
               end
               #ph[0] = ph[0].downcase
               ph.chomp
-              @sphrase = Sentence.find_by_id(@sentence.id)
+              @sphrase = Sentence.find(@sentence.id)
               @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
               if @phrase.save
               else
@@ -177,7 +177,7 @@ class ReadingsController < ApplicationController
   end
 
   def check_order
-    @reading = Reading.find_by_id(params[:reading_id])
+    @reading = Reading.find(params[:reading_id])
     @relative_ids = params[:relative_ids] #e.g. {1 => {1 => [1,2,3] }, {2 => [3,4,5] }, {2, => {1 => [6,7,8]}, {2 => [1] } }  
     @absolute_ids = params[:absolute_ids] #e.g. [1,1,1,2,3,2,4,5,2,1,6]
     
@@ -218,8 +218,7 @@ class ReadingsController < ApplicationController
     end
 
     @yellow_ids = []
-    #ignore relative paragraph order bc only absolute
-    #now find each paragraph in the array
+
     @relative_ids.each_pair do |paragraph_id, sentences|
       for p in 0..@reading.paragraphs.count
         @paragraph = Paragraph.find_by_id(paragraph_id)
@@ -232,7 +231,7 @@ class ReadingsController < ApplicationController
               end
               phrases.each do |phrase_id|
                 for ph in 0..@sentence.phrases.count
-                  @phrase = Phrase.find_by_id(@relative_order[p+1][s+1][ph]) 
+                  @phrase = Phrase.find_by_id(@relative_order[p+1][s+1][ph])
                   unless @phrase.blank?
                     if "#{@phrase.id}" == phrase_id
                       @yellow_ids.push(phrase_id)

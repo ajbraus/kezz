@@ -7,12 +7,25 @@ line-height: 27px;
 	float: right;
 }
 
+.jumbotron {
+	margin-top:40px;
+	margin-bottom:40px;
+}
+
 .pitch {
 	height:200px;
 }
 
 .row {
 	clear:both;
+}
+
+dd {
+	font-size: 90%;
+}
+
+dt {
+	margin:7px 0 5px 0;
 }
 
 footer {
@@ -95,14 +108,18 @@ p.pbackdrop {
 
 a.logo {
 	float: left;
+	color:black;
 	img {
 		width:170px;
+	}
+	&:hover {
+		text-decoration: none;
 	}
 }
 
 .navbar {
 	padding: 0px 60px;
-	height: 70px;
+	height: 34px;
 	clear:both;
 }
 

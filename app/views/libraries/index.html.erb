@@ -1,21 +1,34 @@
 <% if user_signed_in? %>
-	<div class="span3 pull-right">
-		<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>	
-	</div>
-	<h3 class="offset1">Welcome<%= current_user.sign_in_count > 1 ? ' back' : '' %>, <%= current_user.first_name %><h3>
-	<hr>
+	<section>
+		<div class="span3 pull-right">
+			<%= link_to  "Create New Library", new_library_path, class: "btn btn-primary" %>	
+		</div>
+		<h3 class="offset1">Welcome<%= current_user.sign_in_count > 1 ? ' back' : '' %>, <%= current_user.first_name %><h3>
+		<hr>
 
-	<div class="span12">
-		<h4>In Progress</h4>
-		<%= render partial: 'shared/thumbnails', locals: { :array => @in_progress_libraries } %>
-	</div>
+		<div class="span12">
+			<h4>In Progress</h4>
+			<%= render partial: 'shared/thumbnails', locals: { :array => @in_progress_libraries } %>
+		</div>
+	</section>
 <% else %>
-	<div class="span5 offset2">
-		<h2> Welcome to kezz </h2>
+<div class="row jumbotron">
+	<div class="span5 offset1">
+		<h1> Welcome. </h1><br>
+		<div class='lead'>The mission of the Kezz Academy is to offer innovative reading and writing skills training online for free.<br><br>Currently we have one product called Kezzes. Try unscrambling a kezz from one of the libraries below or create and share your own Kezz.</div>
 	</div>
-	<div class="span5">
-		Video
+	<div class="span5 offset1">
+		<h3>Our Core Values</h3>
+		<dl>
+			<dt>Motivation</dt>
+			<dd>We want to make learning experiences that people love. Awesome stuff that engages them, that is tactile, challenging, remarkable, and fun.</dd>
+			<dt>Heuristics</dt>
+			<dd>Technology can already help you memorize things. Here we try to create experiences that instill a 'gut feeling' for the knowledge you've learned.</dd>
+			<dt>Automatic</dt>
+			<dd>Power to the teachers who are shoulder to shoulder and face to face with students. We want to make their jobs as easy and automatic as possible so they can focus on growing students.</dd>
+		</dl>
 	</div>
+</div>
 <% end %>
 <hr>
 <div class="span12">

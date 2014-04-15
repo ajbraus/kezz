@@ -1,7 +1,7 @@
 <div class="span3 pull-right">
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">sidebar</li>
+      <li class="nav-header">Library Owner</li>
       <% if user_signed_in? %>
       	<li><%= link_to 'Edit', edit_library_path(@library) %> </li>
       <% end %>
@@ -10,7 +10,7 @@
   </div><!--/.well -->
 </div><!--/span-->
 
-<div class="span8 pull-left">
+<div class="span8">
 	<div class="offset1"><img width="200px" src="<%= @library.img_url %>" class="img-polaroid"/></div>
 	<dl class="dl-horizontal">
   	<dt>Name</dt>
@@ -21,52 +21,54 @@
 	  <dd class="muted"><%= @library.description %></dd>
 	</dl>
 </div>
-<div class="span11">
-	<table class="table table-hover">
-		<thead>
-  		<tr>
-  			<th>No.</th>
-  			<th>Reading Title</th>
-  			<th>Source</th>
-  			<th>Author</th>
-  			<th>Summary</th>
-  			<th>Rating</th>
-  		<tr>
-  	</thead>
-  	<tbody>
-			<% @readings.each_with_index do |r, index| %>
-  		<tr>
-  			<td>
-  				<%= index + 1 %>
-  			</td>
-  			<td>
-  				<%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
-				</td>		
-				<td>
-					<%= r.source %>
-				</td>
-				<td>
-					<%= r.author %>
-				</td>
-				<td class="muted">
-					<%= r.summary %>
-				</td>
-				<td>
-					<%= r.rating %> 
-				</td>
-				<% if current_user == @library.creator %>
-					<td>
-        		<%= link_to 'Edit', edit_library_reading_path(@library, r) %>
-					</td>
-					<td>
-						<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
-					</td>
-				<% end %>
-			</tr>
-			<% end %>
-		<tbody>
-	</table>
+<div class="span12">
+  <% if user_signed_in? %>
+  <div class="span3 pull-right"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary btn-large" %></div>
+  <% end %>
+  <section>
+  	<table class="table table-hover">
+  		<thead>
+    		<tr>
+    			<th>No.</th>
+    			<th>Reading Title</th>
+    			<th>Source</th>
+    			<th>Author</th>
+    			<th>Summary</th>
+    			<th>Rating</th>
+    		<tr>
+    	</thead>
+    	<tbody>
+  			<% @readings.each_with_index do |r, index| %>
+    		<tr>
+    			<td>
+    				<%= index + 1 %>
+    			</td>
+    			<td>
+    				<%= link_to "#{r.title.capitalize}", library_reading_path(@library, r) %>
+  				</td>		
+  				<td>
+  					<%= r.source %>
+  				</td>
+  				<td>
+  					<%= r.author %>
+  				</td>
+  				<td class="muted">
+  					<%= r.summary %>
+  				</td>
+  				<td>
+  					<%= r.rating %> 
+  				</td>
+  				<% if current_user == @library.creator %>
+  					<td>
+          		<%= link_to 'Edit', edit_library_reading_path(@library, r) %>
+  					</td>
+  					<td>
+  						<%= link_to 'Destroy', library_reading_path(@library, r), method: :delete, data: { confirm: 'Are you sure you would like to delete this reading?' } %></span>
+  					</td>
+  				<% end %>
+  			</tr>
+  			<% end %>
+  		<tbody>
+  	</table>
+  </section>
 </div>
-<% if user_signed_in? %>
-<div class="span3"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary" %></div>
-<% end %>

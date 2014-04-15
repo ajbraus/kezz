@@ -1,5 +1,5 @@
-# submit ids when click on the check order button
 $ ->
+	# submit ids when click on the check order button
 	$(".check_order").click (e) ->
 		e.preventDefault();
 
@@ -26,9 +26,8 @@ $ ->
 			relative_ids[paragraph_id] = sentence_ids
 			
 
-			#myMap[keyVal] = objVal
+		#myMap[keyVal] = objVal
 		#relative_ids_json = JSON.stringify(relative_ids);
-
     # @relative_ids = { "paragraph_id_1" => { "sentence_id_1" => ["phrase_id_1", "phrase_id_2", "phrase_id_3"], "sentence_id_2" => ["phrase_id_4"] }, "paragraph_id_2" =>  }
     # @relative_ids[0] = "paragraph_id_1"
     # @relative_ids[0][0] = "setntence_id_1"

@@ -1,9 +1,9 @@
-$ ->
-	capitalizeFirstLetter (string) ->
-	return string.charAt(0).toUpperCase() + string.slice(1);
+# $ ->
+# 	capitalizeFirstLetter (string) ->
+# 	return string.charAt(0).toUpperCase() + string.slice(1);
 	
-	phrases = $('.shandle').next().children().next(); #returns array
+# 	phrases = $('.shandle').next().children().next(); #returns array
 	
-	for phrase in phrases
-		phraseText = phrase.text();
-		capitalizeFirstLetter(phraseText)
+# 	for phrase in phrases
+# 		phraseText = phrase.text();
+# 		capitalizeFirstLetter(phraseText)
