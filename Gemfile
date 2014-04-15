@@ -47,3 +47,7 @@ end
 gem 'coffee-rails', '~> 3.2.1'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+
+group :production do
+  gem 'rails_12factor'
+end
