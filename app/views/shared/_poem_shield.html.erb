@@ -1,0 +1,7 @@
+<%= link_to poem, class:"thumbnail" do %>
+  <div class="caption">
+    <h3><%= poem.title %></h3>
+    <p class='text-right'><b>by</b> <%= poem.user.name %></p>
+    <p class='text-muted'><%= poem.body %></p>
+  </div>
+<% end %>   

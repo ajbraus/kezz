@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-5 col-sm-offset-1">
+    <h1>Winged Words</h1>
+    <div class='lead'>Makes it easy for you to keep track of the meter and rhyme of your poetry through visualizations and instant feedback.</div>
+  </div>
+  <div class="col-sm-6">
+    <%= render 'form' %>
+  </div>
+</div>
+
+<br>
+<hr>
+<br>
+<div class="row">
+  <% if user_signed_in? %>
+    <div class="col-sm-4">
+      <h4 class='text-center'>In Progress</h4>
+      <%= render partial: 'shared/poem_thumbnails', locals: { :array => @in_progress } %>
+    </div>
+  <% end %>
+  <div class="col-sm-4">
+    <h4 class='text-center'>Trending</h4>
+    <%= render partial: 'shared/poem_thumbnails', locals: { :array => @trending } %>
+  </div>
+  <div class="col-sm-4">
+    <h4 class='text-center'>Recent</h4>
+    <%= render partial: 'shared/poem_thumbnails', locals: { :array => @recent } %>
+  </div>
+</div>

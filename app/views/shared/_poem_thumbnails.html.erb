@@ -1,0 +1,7 @@
+<ul class="thumbnails">
+  <% array.each do |p| %>
+    <li>
+      <%= render partial: 'shared/poem_shield', locals: { :poem => p } %>
+    </li>
+  <% end %>
+</ul>

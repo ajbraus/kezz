@@ -1,4 +1,4 @@
-<div class="span3 pull-right">
+<div class="col-sm-3 pull-right">
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">Library Owner</li>
@@ -10,8 +10,8 @@
   </div><!--/.well -->
 </div><!--/span-->
 
-<div class="span8">
-	<div class="offset1"><img width="200px" src="<%= @library.img_url %>" class="img-polaroid"/></div>
+<div class="col-sm-8">
+	<div class="col-sm-offset-1"><img width="200px" src="<%= @library.img_url %>" class="img-polaroid"/></div>
 	<dl class="dl-horizontal">
   	<dt>Name</dt>
   	<dd><%= @library.name %></dd>
@@ -21,9 +21,9 @@
 	  <dd class="muted"><%= @library.description %></dd>
 	</dl>
 </div>
-<div class="span12">
+<div class="col-sm-12">
   <% if user_signed_in? %>
-  <div class="span3 pull-right"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary btn-large" %></div>
+  <div class="col-sm-3 pull-right"><%= link_to "Create New Reading", new_library_reading_path(@library), class: "btn btn-primary btn-large" %></div>
   <% end %>
   <section>
   	<table class="table table-hover">

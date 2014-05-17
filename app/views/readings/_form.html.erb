@@ -1,4 +1,4 @@
-<div class="span9">
+<div class="col-sm-9">
 <%= form_for [@reading.library, @reading], class:"form-horizontal"  do |f| %>
   <% if @reading.errors.any? %>
     <div id="error_explanation">
@@ -12,20 +12,20 @@
     </div>
   <% end %>
     <%= f.label :title, "Title*", class:"control-label" %>
-    <%= f.text_field :title, class:"input-xxlarge" %>
+    <%= f.text_field :title, class:"input-xxlarge form-control" %>
     <%= f.label :source, "Source*" %>
-    <%= f.text_field :source, class:"input-xxlarge" %>
+    <%= f.text_field :source, class:"input-xxlarge form-control" %>
     <%= f.label :author, "Original Author*" %>
-    <%= f.text_field :author, class:"input-xxlarge" %>
+    <%= f.text_field :author, class:"input-xxlarge form-control" %>
     <%= f.label :summary %>
-    <%= f.text_area :summary, class:"input-xxlarge summary" %>
+    <%= f.text_area :summary, class:"input-xxlarge summary form-control" %>
     <legend>scramble*</legend>
     <%= f.check_box :phrasely, checked: true %>  <%= f.label :phrasely, raw("&#182; paragraphly"), class:'checkbox inline' %> 
     <%= f.check_box :sentencely, checked: true %> <%= f.label :sentencely, raw("&#167; sentencely"), class:'checkbox inline' %>
     <%= f.check_box :paragraphly, checked: true %> <%= f.label :paragraphly, raw("&#186; phrasely"), class:'checkbox inline' %>
     <hr>
     <%= f.label :content, "Text*" %>
-    <%= f.text_area :content, class:"input-xxlarge"  %>
+    <%= f.text_area :content, class:"input-xxlarge form-control"  %>
     <%= f.submit class:"btn btn-primary" %>
 <% end %>
 </div>

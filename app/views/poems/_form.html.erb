@@ -1,0 +1,31 @@
+<%= form_for(@poem) do |f| %>
+  <% if @poem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this poem from being saved:</h2>
+
+      <ul>
+      <% @poem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="pull-left text-muted title-label">
+    <div>title</div>
+    <div class='poem-label'>text</div>
+  </div>
+  <div contenteditable="true" class="editable-div" id="poem" spellcheck='false'></div>
+
+<!--   <div class="editable-div" id="poem" spellcheck='false'>
+    <div contenteditable="true" class="editable-line" data-line-num="line1" style="white-space: normal;" >
+    </div>
+  </div>
+ -->  
+  <% if false %><%= f.text_field :title, class:"form-control", placeholder: "Title" %><br><% end %>  
+  <% if false %><%= f.text_area :body, id:"poem", class:"lined", autofocus: true %><% end %>
+  <section>
+    <%= f.submit "Save Poem", class:"btn btn-lg btn-success pull-right" %> 
+    <%= f.submit "Save & Publish", class:"btn btn-lg btn-primary pull-right breathing-room" %>
+  </section>
+<% end %>

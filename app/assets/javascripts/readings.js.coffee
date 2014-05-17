@@ -1,4 +1,39 @@
 $ ->
+	# capitalizeFirstLetter (string) ->
+	# return string.charAt(0).toUpperCase() + string.slice(1);
+
+	# phrases = $('.shandle').next().children().next(); #returns array
+
+	# for phrase in phrases
+	#   phraseText = phrase.text();
+	#   capitalizeFirstLetter(phraseText)
+
+	$(".pSortable").sortable
+		# start: (event, ui) ->
+		#   $("body").animate
+		#     zoom: 1
+		#   , 300
+		#   return
+		# stop: (event, ui) ->
+		#   $("body").animate
+		#     zoom: 1
+		#   , 300
+		#   return
+	  placeholder: "pbackdrop"
+	  handle: ".phandle"
+	  items: "p"
+	  opacity: 0.8
+
+	$(".sSortable").sortable
+	  placeholder: "sbackdrop"
+	  handle: ".shandle"
+	  opacity: 0.8
+	  
+	$(".phSortable").sortable
+	  placeholder: "phbackdrop"
+	  handle: ".phhandle"
+	  opacity: 0.8
+
 	# submit ids when click on the check order button
 	$(".check_order").click (e) ->
 		e.preventDefault();
@@ -13,6 +48,7 @@ $ ->
 		paragraphs = $('.reading').children('p')
 		for paragraph in paragraphs
 			paragraph_id = $(paragraph).attr('id')
+			console.log(paragraph_id)
 			sentences = $(paragraph).children('span')
 			sentence_ids = {}
 			for sentence in sentences

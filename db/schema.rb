@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130317223211) do
+ActiveRecord::Schema.define(:version => 20140516210533) do
 
   create_table "libraries", :force => true do |t|
     t.string   "name",        :null => false
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(:version => 20130317223211) do
   end
 
   add_index "phrases", ["sentence_id"], :name => "index_phrases_on_sentence_id"
+
+  create_table "poems", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "poems", ["user_id"], :name => "index_poems_on_user_id"
 
   create_table "readings", :force => true do |t|
     t.string   "title",       :null => false

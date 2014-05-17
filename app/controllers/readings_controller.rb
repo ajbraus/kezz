@@ -1,5 +1,5 @@
 class ReadingsController < ApplicationController
-
+  before_filter :authenticate_user!, except: [:index, :show, :check_order]
   # GET /readings/1
   # GET /readings/1.json
   def show
@@ -178,7 +178,7 @@ class ReadingsController < ApplicationController
 
   def check_order
     @reading = Reading.find(params[:reading_id])
-    @relative_ids = params[:relative_ids] #e.g. {1 => {1 => [1,2,3] }, {2 => [3,4,5] }, {2, => {1 => [6,7,8]}, {2 => [1] } }  
+    @relative_ids = params[:relative_ids] #e.g. { 1 => { 1 => [1,2,3], 2 => [3,4,5] }, 2 => { 1 => [6,7,8], 2 => [1] } }  
     @absolute_ids = params[:absolute_ids] #e.g. [1,1,1,2,3,2,4,5,2,1,6]
     
     @relative_order = []
@@ -210,7 +210,7 @@ class ReadingsController < ApplicationController
     @red_ids = []
     @green_ids = []
     for i in 0..@absolute_ids.count do
-      if @absolute_ids[i] == "#{@absolute_order[i]}"
+      if @absolute_ids[i].to_i == @absolute_order[i]
         @green_ids.push(@absolute_ids[i])
       else
         @red_ids.push(@absolute_ids[i])
@@ -218,28 +218,17 @@ class ReadingsController < ApplicationController
     end
 
     @yellow_ids = []
-
-    @relative_ids.each_pair do |paragraph_id, sentences|
-      for p in 0..@reading.paragraphs.count
-        @paragraph = Paragraph.find_by_id(paragraph_id)
-        for s in 0..@paragraph.sentences.count
-          sentences.each_pair do |sentence_id, phrases|
-            @sentence = Sentence.find_by_id(@relative_order[p+1][s])
-            unless @sentence.blank?
-              if "#{@sentence.id}" == sentence_id
-                @yellow_ids.push(sentence_id)
-              end
-              phrases.each do |phrase_id|
-                for ph in 0..@sentence.phrases.count
-                  @phrase = Phrase.find_by_id(@relative_order[p+1][s+1][ph])
-                  unless @phrase.blank?
-                    if "#{@phrase.id}" == phrase_id
-                      @yellow_ids.push(phrase_id)
-                    end
-                  end
-                end
-              end
-            end
+    @relative_ids.each_with_index do |(r_paragraph_id, sentences), p_index| 
+      if r_paragraph_id.to_i == @reading.paragraphs[p_index].id
+        @yellow_ids << r_paragraph_id 
+      end
+      sentences.each_with_index do |(r_sentence_id, phrases), s_index| 
+        if r_sentence_id.to_i == @reading.paragraphs[p_index].sentences[s_index].id
+          @yellow_ids << r_sentence_id 
+        end
+        phrases.each_with_index do |r_phrase_id, ph_index|
+          if r_phrase_id.to_i == @reading.paragraphs[p_index].sentences[s_index].phrases[ph_index].id
+            @yellow_ids << r_phrase_id 
           end
         end
       end
@@ -247,13 +236,13 @@ class ReadingsController < ApplicationController
     
     #remove green_ids from yellow_ids bc their 'more' in order already
     @yellow_ids = @yellow_ids - @green_ids
-    #@red_ids = @red_ids - @yellow_ids
+    @red_ids = @red_ids - @yellow_ids
 
     #return complex array of ids to client:
-    @ids = []
-    @ids = @ids.push(@red_ids) 
-    @ids = @ids.push(@yellow_ids)
-    @ids = @ids.push(@green_ids)
+    @ids = { "red_ids" => @red_ids, "yellow_ids" => @yellow_ids, "green_ids" => @green_ids }
+    # @ids = @ids.push(@red_ids) 
+    # @ids = @ids.push(@yellow_ids)
+    # @ids = @ids.push(@green_ids)
 
     return @ids
 

@@ -1,7 +1,7 @@
 class Phrase < ActiveRecord::Base
   belongs_to :sentence
   attr_accessible :position, :text, :sentence_id
-
+  
   acts_as_list :scope => :sentence
 
   def sort

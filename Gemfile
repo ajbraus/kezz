@@ -12,9 +12,15 @@ gem 'thin'
 #gem 'airbrake'
 #gem 'newrelic_rpm'
 
-gem "therubyracer"
-gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'twitter-bootstrap-rails'
+gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem "therubyracer", :platform => :ruby
+#gem 'less-rails'
+gem 'coffee-rails'
+gem 'sass-rails'
+gem 'uglifier', '>= 1.0.3'
+gem 'rails_12factor', group: :production
 
 group :development, :test do 
 	gem 'faker', '1.0.1'
@@ -34,20 +40,4 @@ group :test do
 	gem 'guard-rspec', '1.1.0'
 	gem "spork", '0.9.2'
 	gem 'guard-spork', '1.1.0'
-end
-
-group :assets do
-	gem 'font-awesome-sass-rails'
-  gem 'sass-rails',   '~> 3.2.3'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-  gem 'uglifier', '>= 1.0.3'
-end
-
-gem 'coffee-rails', '~> 3.2.1'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-
-group :production do
-  gem 'rails_12factor'
 end

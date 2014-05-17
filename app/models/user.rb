@@ -10,10 +10,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :libraries
+  has_many :poems
 
   validates :name, presence: true
-
-
 
   def first_name
     name.split(' ')[0]

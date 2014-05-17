@@ -7,5 +7,7 @@ class CreateSentences < ActiveRecord::Migration
       t.timestamps
     end
     add_index :sentences, :paragraph_id
+
+    execute("ALTER SEQUENCE sentences_id_seq START with 1000 RESTART;")
   end
 end

@@ -1,46 +1,87 @@
-fix yellow order - not perfect
+landing page kezz, check order
 
-count # of times they checked
+Make first kezz: It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way...
 
-show placeholder highlight for s and ph
+kezzes working
+haikus
+add,edit,delete words anywhere in the story (flow & fierro)
+explain more . . . 
 
-show 'half way there' and 'big wins' '+4' or +5, -4
+Admin control panel layout
+KEZZ ACADEMY logo
+Login|Register / My Profile
+Games
+	Kezzes
+	Winged Words
+	Finnegan
 
-show timer - stop timer when complete
 
-add validations
+Go live
+
+put in twitter and fb like buttons (in all pages) 
+
+Personal public profile
+	kezz's you've completed, attempted
+	poems you've written
+	contributions to the story you've made
+	your activity
+
+--------------------------------------------------------------
+Winged Words
+	style lines
+	save poems
+	
+	detect rhymes	- 
+		CMUDict (CMU Pronouncing Dictionary), 
+		Metaphone
+		Arpabet - https://github.com/zeke/arpabet (rails rhyme lookup) - hard (all latin script languages)
+		http://rhymebrain.com/api.html - easy (english only)
+		https://github.com/nathanielksmith/node-cmudict
+
+		couplets
+		ottava rima
+		perfect rhymes, general rhymes, and mirror rhymes, slant rhymes
+
+	detect iambs 
+	iambic - de-DUMM (U')
+	anapestic- de-de-DUMM (UU')
+	trochaic- DUMM-de ('U)
+	dactylic- DUMM-de-de ('UU) 
+
+	slam
+
 
 --------------------------------------------------------------
 
-upcase beginnings of sentences in js
-	found selector for this but don't know how to upcase the text 
-		on load upcase the character and on all the sortable() update methods do it again.
+Kezz:
+	all paragraphs are orange or green only
 
-leave periods at the end of every sentence dispite its phrase order
+	count # of times they checked
+	show placeholder highlight for s and ph
+	show 'half way there' and 'big wins' '+4' or +5, -4
+	show timer - stop timer when complete
+	add validations
 
-make sample_data work . . . create model method that creates all the paragraphs, sentences, and phrases, then call it from the rake task.
 
---------------------------------------------------------------
+	upcase beginnings of sentences in js
+		found selector for this but don't know how to upcase the text 
+			on load upcase the character and on all the sortable() update methods do it again.
 
-pick url
-put in twitter and fb like buttons (in all pages)
+	leave periods at the end of every sentence dispite its phrase order
 
-GO LIVE 
+	make sample_data work . . . create model method that creates all the paragraphs, sentences, and phrases, then call it from the rake task.
 
 ---------------------------------------------------------------
 
-Personal public profile
-	kezz's you've liked
-	attempted 
-		save where  you are at
-		save time
-	rated
-	completed
-		time to complete
-		allow to rate
+Build the story
+	add words
+	change words
+	remove words
 
 
 --------------------------------------------------------------
+
+vote up people's poems, follow poets, get a digest
 
 
 Gamification: 
@@ -95,3 +136,13 @@ I'm Nikolai the Russian
 I'm Ian the investor
 	I like kezz because it is a platform with many users and a proven model. I plan to buy it for oodles of money and wrap it into a giant soulless backward educational technologly corporation
 
+
+
+
+other ideas:
+
+Allusions
+heuristic ways to learn 
+leaderboards/gamification of writing
+instagrams of writing
+collaborative writing

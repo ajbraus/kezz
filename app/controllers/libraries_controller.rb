@@ -1,10 +1,12 @@
 class LibrariesController < ApplicationController
+  before_filter :authenticate_user!, except: [:index, :show]
   # GET /libraries
   # GET /libraries.json
   def index
     if user_signed_in?
       @in_progress_libraries = Library.limit(5)
     end
+    @reading = Reading.first
     @libraries = Library.all
     @trending_libraries = Library.limit(5)
     @recent_libraries = Library.limit(5)

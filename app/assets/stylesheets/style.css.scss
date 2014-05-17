@@ -16,6 +16,10 @@ line-height: 27px;
 	height:200px;
 }
 
+section {
+	margin-top:10px;
+}
+
 .row {
 	clear:both;
 }
@@ -26,6 +30,10 @@ dd {
 
 dt {
 	margin:7px 0 5px 0;
+}
+
+ul, li {
+	list-style: none;
 }
 
 footer {
@@ -45,6 +53,10 @@ float: left;
 margin-left: 2px;
 margin-top: 2px;
 border-radius: 4px;
+}
+
+.small {
+	font-size:90%;
 }
 
 textarea.summary {
@@ -130,4 +142,75 @@ a.logo {
 hr {
 	clear:both;
 	margin:0;
+}
+
+.linedwrap {
+	border: 1px solid #eee;
+	width:auto !important;
+	.lines {
+	margin-top: 0px;
+	width: 50px;
+	float: left;
+	overflow: hidden;
+	border-right: 1px solid #eee;
+	margin-right: 10px;
+	}
+}
+.linedtextarea textarea {
+	width:90% !important;
+padding-right: 0.3em;
+padding-top: 0.3em;
+border: 0;
+border: none;
+overflow: auto;
+outline: none;
+
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+.breathing-room {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.editable-div {
+	border: 1px solid #eee;
+	padding-right: 0.3em;
+	padding-top: 0.3em;
+	overflow: auto;
+	outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	overflow: auto;
+	outline: none;
+	height: 320px;
+	padding:10px;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	font-size: 10pt;
+	font-family: monospace;
+	line-height: normal !important;
+}
+
+.editable-line {
+		outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	overflow: auto;
+	outline: none;
+}
+
+.title-label {
+	margin-top:5px;
+	margin-right:10px;
+	font-size:90%;
+}
+.poem-label {
+	margin-top:3px;
 }

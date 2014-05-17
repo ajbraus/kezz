@@ -1,4 +1,4 @@
-<div class="span4 offset4">
+<div class="col-sm-4 col-sm-offset-4">
   <br>
   <legend>Login</legend>
 
@@ -7,12 +7,12 @@
     <div class="control-group">
     	<%= f.label :email, class:"control-label" %>
     	<div class="controls">
-    		<%= f.email_field :email %>
+    		<%= f.email_field :email, class:"form-control" %>
     	</div>
   	</div>
 
     <div><%= f.label :password %>
-    <%= f.password_field :password %></div>
+    <%= f.password_field :password, class:"form-control" %></div>
 
     <% if devise_mapping.rememberable? -%>
       <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
