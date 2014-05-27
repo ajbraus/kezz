@@ -9,7 +9,6 @@ function countWordSyllables(word) {
 function countLineSyllables(line, index) {
   var line = line.split(/\s+/);
   var totalSyllables = 0
-  console.log(line)
   line.forEach(function(word) { //count sylables per word
     if (word.length > 0) {
       totalSyllables += countWordSyllables(word) // add up syllables to count per line  
@@ -41,20 +40,22 @@ function countLineSyllables(line, index) {
 $(function() {
   $('#poem').on('keyup', function(e) {
     if (e.keyCode == 13) { //enter && shift
-      if ($('#poem').children().length == 1) {
+      if ($('#poem').children().length == 0) {
         document.execCommand('insertHTML', false, '<br>');
+        $('#poem').append(",");
       }
       // TODO add line number on left of new line
       // TODO stripe white space from end of current line
     } 
-    // TODO select current div and style it
-    var poem_html = $('#poem').html()
-    var new_poem_html = poem_html.replace(/<\/div>/gi, "</div>,");
-    var linesArray = new_poem_html.split(",");
-    linesArray.forEach(function(line, index) { // break up lines by word
+    var lineArray = $('#poem div');
+    $.each(lineArray, function(index, line) { // break up lines by word
       countLineSyllables(line, index);
     });
   });
+
+// this is tall text
+// <div style="color:red;">here we go</div>
+// <div>and this is what we get</div>
 
 
 // ALTERNATIVE
