@@ -1,4 +1,31 @@
 // STRATEGY 1
+function countWordSyllables(word) {
+  word = word.toLowerCase();
+  if(word.length <= 3) { return 1; }
+  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+  word = word.replace(/^y/, '');
+  return word.match(/[aeiouy]{1,2}/g).length;
+}
+
+function countLineSyllables(line, index) {
+  var line = line.split(/\s+/);
+  var totalSyllables = 0
+  line.forEach(function(word) { //count sylables per word
+    if (word.length > 0) {
+      totalSyllables += countWordSyllables(word) // add up syllables to count per line  
+    }
+  });
+  if (totalSyllables == 5) { //style lines with 5 or 7 syllables
+    $('#poem div:nth-child(' + index + ')').css('color', 'blue');
+  } else if (totalSyllables == 7) {
+    $('#poem div:nth-child(' + index + ')').css('color', 'green');
+  } else if (totalSyllables == 10) {
+    $('#poem div:nth-child(' + index + ')').css('color', 'gold');
+  } else {
+    $('#poem div:nth-child(' + index + ')').css('color', 'grey');
+  }
+}
+
 // wrap <div></div> around first line
 // poem is array of lines, first el is title (don't color it, add another <br> after it)
 // add | character between <div>'s

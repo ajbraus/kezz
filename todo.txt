@@ -3,9 +3,9 @@ landing page kezz, check order
 Make first kezz: It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way...
 
 kezzes working
-haikus
+haikus, save poems
 add,edit,delete words anywhere in the story (flow & fierro)
-explain more . . . 
+explain more how to play, be SUPER Explicit
 
 Admin control panel layout
 KEZZ ACADEMY logo
@@ -14,7 +14,6 @@ Games
 	Kezzes
 	Winged Words
 	Finnegan
-
 
 Go live
 
@@ -148,5 +147,14 @@ instagrams of writing
 collaborative writing
 
 
-
+switch to angular:
+	kezz -> 
+		fetch and display @reading 
+		fetch reading_id_order
+		setup drag and drop angular
+		have check_id compare current_id_order with reading_id_order
+		change colors
+	winged-words ->
+		keyup, hack up lines into divs
+		conditionally
 
