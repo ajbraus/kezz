@@ -37,11 +37,15 @@
     <% end %>
   </head>
   <body>
-    <%= render 'shared/header' %>
-
-    <div class="container">
       <%= render partial: "shared/flash_message", flash: flash %> 
-      <%= yield %>
+      <div class='row'>
+        <div class="col-sm-3">
+          <%= render 'shared/sidebar' %>
+        </div>
+        <div class="col-sm-8">
+          <%= yield %>
+        </div>
+      </div>
       <footer>
         <hr>
         <br>
@@ -49,8 +53,6 @@
         <p>&copy; The Kezz Academy 2014</p>
         <br>
       </footer>
-
-    </div> <!-- /container -->
 
     <!-- Javascripts
     ================================================== -->

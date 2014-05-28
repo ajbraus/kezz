@@ -1,22 +1,32 @@
 <div class="row">
-  <div class="col-sm-5 col-sm-offset-1">
-    <h1> Welcome. </h1><br>
+  <div class="col-sm-12">
+    <h1 class='text-center'> Welcome. </h1>
     <div class='lead'>
-      The mission of the Kezz Academy is to offer out-of-the-box reading and writing skills training online for free. Currently we have <b>3 games</b>.
+      The mission of the Kezz Academy is to offer reading and writing skills training online for free.
     </div>
   </div>
-  <div class="col-sm-5 col-sm-offset-1">
-    <dl>
-      <dt><%= link_to "Kezz Readings", libraries_path %></dt> 
-      <dd>Where you unscramble samples of the best fiction and scientifc writing.</dd>
-      <dt><%= link_to "Winged Words", new_poem_path %></dt>
-      <dd>Where its easy and fun to write and share great poetry</dd>
-      <dt><a href="#">The Finnegan Project</a></dt>
-      <dd>Where you can work together with everyone on the internet on one giant collaborative story.</dd>
-    </dl>
+</div>
+<br>
+<hr>
+<br>
+<div class="row">
+  <h1 class='text-center'>Our Games</h1>
+  <br>
+  <div class="col-sm-4">
+    <h4 class='text-center'><%= link_to "Kezz Readings", libraries_path %></h4>
+    <dd>
+      Where you unscramble samples of the best fiction and scientifc writing
+    </dd>
+  </div>
+  <div class="col-sm-4">
+    <h4 class='text-center'><%= link_to "Winged Words", new_poem_path %></h4>
+    <dd>Where its easy and fun to write and share great poetry.</dd>
+  </div>
+  <div class="col-sm-4">
+    <h4 class='text-center'><a href="#">The Finnegan Project</a></h4>
+    <dd>Where you can work together with everyone on the internet on one giant collaborative story.</dd>
   </div>
 </div>
-
 <br>
 <hr>
 <br>

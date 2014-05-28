@@ -11,11 +11,17 @@
     </div>
   <% end %>
 
+<!--   <div>
+    <input type="text" class="form-control" placeholder="Title (optional)" />
+  </div> -->
+  <br>
   <div class="pull-left text-muted title-label">
-    <div>title</div>
-    <div class='poem-label'>text</div>
+    <div class="poem-title">title</div>
+    <div class='poem-label' id="lineCount"></div>
   </div>
-  <div contenteditable="true" class="editable-div" id="poem" spellcheck='false'></div>
+  <div contenteditable="true" class="editable-div" id="poem" spellcheck='false'>
+    <div></div>
+  </div>
 
 <!--   <div class="editable-div" id="poem" spellcheck='false'>
     <div contenteditable="true" class="editable-line" data-line-num="line1" style="white-space: normal;" >

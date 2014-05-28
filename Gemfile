@@ -15,7 +15,7 @@ gem 'thin'
 gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem "therubyracer", :platform => :ruby
+gem 'therubyracer', '~> 0.12.0', :platform => :ruby
 #gem 'less-rails'
 gem 'coffee-rails'
 gem 'sass-rails'

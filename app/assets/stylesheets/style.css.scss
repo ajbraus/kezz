@@ -7,6 +7,29 @@ line-height: 27px;
 	float: right;
 }
 
+.sidebar {
+z-index: 1000;
+display: block;
+overflow-x: hidden;
+overflow-y: auto;
+background-color: #f5f5f5;
+border-right: 1px solid #eee;
+li {
+	font-size: 1.2em;
+	line-height: 2.3333333333333335em;
+}
+
+}
+
+a.logo {
+	color: black;
+	text-decoration: none;
+	font-size: 100px;
+	width: 100%;
+	text-align: center;
+	line-height: 170px;
+}
+
 .jumbotron {
 	margin-top:40px;
 	margin-bottom:40px;
@@ -118,17 +141,6 @@ p.pbackdrop {
 	cursor:pointer;
 }
 
-a.logo {
-	float: left;
-	color:black;
-	img {
-		width:170px;
-	}
-	&:hover {
-		text-decoration: none;
-	}
-}
-
 .navbar {
 	padding: 0px 60px;
 	height: 34px;
@@ -197,20 +209,9 @@ box-shadow: none;
 	line-height: normal !important;
 }
 
-.editable-line {
-		outline: none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	overflow: auto;
-	outline: none;
-}
-
-.title-label {
-	margin-top:5px;
-	margin-right:10px;
-	font-size:90%;
-}
 .poem-label {
-	margin-top:3px;
+	margin-top: 13px;
+	margin-right: 7px;
+	font-size: 64%;
+	line-height: 15px;
 }
