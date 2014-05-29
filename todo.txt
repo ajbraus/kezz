@@ -7,15 +7,8 @@ haikus, save poems
 add,edit,delete words anywhere in the story (flow & fierro)
 explain more how to play, be SUPER Explicit
 
-Admin control panel layout
 KEZZ ACADEMY logo
 Login|Register / My Profile
-Games
-	Kezzes
-	Winged Words
-	Finnegan
-
-Go live
 
 put in twitter and fb like buttons (in all pages) 
 
@@ -27,13 +20,12 @@ Personal public profile
 
 --------------------------------------------------------------
 Winged Words
-	style lines
 	save poems
 	
 	detect rhymes	- 
 		CMUDict (CMU Pronouncing Dictionary), 
 		Metaphone
-		Arpabet - https://github.com/zeke/arpabet (rails rhyme lookup) - hard (all latin script languages)
+		Arpabet - https://github.com/zeke/arpabet (rails rhyme lookup) - hard (all latin script languages) - http://stackoverflow.com/questions/15822832/rhyme-dictionary-from-cmu-pronunciation-database - http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in=buddies - https://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict.0.7a
 		http://rhymebrain.com/api.html - easy (english only)
 		https://github.com/nathanielksmith/node-cmudict
 
