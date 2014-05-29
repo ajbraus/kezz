@@ -1,10 +1,7 @@
 <div class="row">
-	<div class="col-sm-5 col-sm-offset-1">
-		<h1>Kezz</h1>
-		<div class='lead'>Try unscrambling a kezz from one of the libraries below or create and share your own Kezz.</div>
-		<%= link_to  "Start A Kezz Library", new_library_path, class: "btn btn-lg btn-primary pull-right" %>	
-	</div>
-	<div class="col-sm-5 col-sm-offset-1">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class='lead'>Try unscrambling this example kezz or pick from one of the libraries below. Create and share your own Kezz Library and Kezz Readings.</div>
+		<div class='text-muted'>Example from Tale of Two Cities</div>
 		<p class="pull-left pSortable reading">
 		  <% @reading.paragraphs.shuffle.each do |p| %>
 		    <p id="<%= p.id %>" class="sSortable getId paragraph"><u class="phandle">&#182;</u>
@@ -27,6 +24,8 @@
 <br>
 <hr>
 <br>
+<h3 class="pull-left">Kezz Libraries</h3>
+<%= link_to  "New Kezz Library", new_library_path, class: "btn btn-primary pull-right" %>	
 <div class="row">
 	<% if user_signed_in? %>
 		<div class="col-sm-4">

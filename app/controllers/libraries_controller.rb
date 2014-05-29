@@ -7,6 +7,7 @@ class LibrariesController < ApplicationController
     if user_signed_in?
       @in_progress_libraries = Library.limit(5)
     end
+    @headerTitle = "Kezz Readings"
     @reading = Reading.first
     @libraries = Library.all
     @trending_libraries = Library.limit(5)

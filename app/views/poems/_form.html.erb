@@ -1,51 +1,29 @@
+<%= form_for(@poem) do |f| %>
 <div class="col-sm-6">
-  <%= form_for(@poem) do |f| %>
-    <% if @poem.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this poem from being saved:</h2>
+  <% if @poem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this poem from being saved:</h2>
 
-        <ul>
-        <% @poem.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-
+      <ul>
+      <% @poem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <%= f.text_field :title, class:"text-input", id:"title", placeholder: "Title" %><br>
   <%= f.text_area :body, id:"poem", class:"lined", autofocus: true %>
-
-  <!--   <div>
-      <span class='text-muted'>title</span> <input type="text" class="text-input" placeholder="" />
-    </div>
-    <br>
-    <div class="pull-left text-muted title-label">
-      <div class="poem-title">text</div>
-      <!-- <div class='poem-label' id="lineCount"></div> 
-    </div>
-    <textarea id="poem" spellcheck='false'></textarea> -->
-  <!--   <div contenteditable="true" class="editable-div" id="poem" spellcheck='false'>
-      <div></div>
-    </div>
-   -->
-  <!--   <div class="editable-div" id="poem" spellcheck='false'>
-      <div contenteditable="true" class="editable-line" data-line-num="line1" style="white-space: normal;" >
-      </div>
-    </div>
-   -->  
-
-    <section>
-      <%= f.submit "Save Poem", class:"btn btn-lg btn-success pull-right" %> 
-      <%= f.submit "Save & Publish", class:"btn btn-lg btn-primary pull-right breathing-room" %>
-    </section>
-  <% end %>
-
+</div>
+<div class="col-sm-6">
+  <h3 id="poemTitle" class="poem-title">
+    Untitled
+  </h3>
+  <div id="poemText" class="poem-text">
   </div>
-  <div class="col-sm-6">
-    <h3 id="poemTitle" class="poem-title">
-      Untitled
-    </h3>
-    <div id="poemText" class="poem-text">
-    </div>
-  </div>
+</div>
+<section>
+  <%= f.submit "Save Poem", class:"btn btn-lg btn-success pull-right" %> 
+  <%= f.submit "Save & Publish", class:"btn btn-lg btn-primary pull-right breathing-room" %>
+</section>
+<% end %>

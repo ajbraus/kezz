@@ -37,23 +37,23 @@
     <% end %>
   </head>
   <body>
-      <%= render partial: "shared/flash_message", flash: flash %> 
       <div class='row'>
         <div class="col-sm-3">
           <%= render 'shared/sidebar' %>
         </div>
+        <header><%= @headerTitle %></header>
+        <%= render partial: "shared/flash_message", flash: flash %> 
         <div class="col-sm-8">
           <%= yield %>
+          <footer>
+            <hr>
+            <br>
+            <br>
+            <p>&copy; The Kezz Academy 2014</p>
+            <br>
+          </footer>
         </div>
       </div>
-      <footer>
-        <hr>
-        <br>
-        <br>
-        <p>&copy; The Kezz Academy 2014</p>
-        <br>
-      </footer>
-
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

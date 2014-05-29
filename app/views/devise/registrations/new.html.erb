@@ -1,6 +1,6 @@
-<div class="col-sm-4 col-sm-offset-4">
+<div class="col-sm-6 col-sm-offset-3">
   <br>
-  <legend>Register</legend>
+  <legend>Create Profile</legend>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
@@ -16,8 +16,8 @@
 
     <div><%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class:"form-control" %></div>
-
-    <div><%= f.submit "Sign up", class: "btn" %></div>
+<br>
+    <div class='text-right'><%= f.submit "Sign up", class: "btn btn-success btn-lg" %></div>
   <% end %>
 
   <%= render "devise/shared/links" %>
