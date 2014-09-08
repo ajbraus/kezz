@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col-sm-12">
-    <h1 class='text-center'>The Kezz Mission</h1>
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1 class='text-center'>Our Mission</h1>
     <div class='lead text-center'>
-      The mission of the Kezz Academy is to offer the best free online reading and writing educational experiences.
+      We are creating the best online reading and writing educational experiences for free, for everyone.
     </div>
-    <div class='text-center text-muted'>Try out our first two games - Kezz Readings & Winged Words</div>
+    <div class='text-center text-muted'>Try out our first two projects - Kezz Readings & Wing&egrave;d Words</div>
     <br>
     <hr>
     <br>
@@ -45,9 +45,9 @@
     <div class="pull-right btn-default check_order btn-sm btn" title="<%= @reading.id %>">Check Order</div>
   </div>
   <div class="col-lg-6">
-    <h2 class='text-center'>Winged Words - Haiku</h2>
+    <h2 class='text-center'>Wing&egrave;d Words - Haiku</h2>
     <p class='text-muted small'>
-      Winged Words makes it easy and fun to write great poetry and share it. It's the "Instagram of Poetry" - <b>Try writing a haiku</b> (a hiuku has 3 lines: red, blue, red)
+      Wing&egrave;d Words makes it easy and fun to write great poetry and share it. It's the "Instagram of Poetry" - <b>Try writing a haiku</b> (a hiuku has 3 lines: red, blue, red)
     </p>
     <p>
       <%= render 'poems/form' %>
@@ -64,7 +64,7 @@
       Sign up for our launch and spread the word about Kezz Academy. We are trying to get 5,000 sign ups before we go live. 
       <br>
       <br>
-      <div class="btn btn-lg btn-info">Sign up for Launch</div>
+      <%= link_to 'Sign up for Launch', new_user_registration_path, class:"btn btn-lg btn-info" %>
     </div>
   </div>
 </div>
