@@ -1,19 +1,19 @@
 <% @ids["yellow_ids"].each do |yellow| %>
 	//$("#<%= yellow %>").children('u').effect("highlight", { color:"yellow" }, 10000);
-	$("#<%= yellow %>").children('u').css("background", "orange");
-	$(".bar[name='<%= yellow %>']").css("background", "orange");
+	$("#<%= yellow %>").children('u').css("background", "gold");
+	$(".bar[name='<%= yellow %>']").css("background", "gold");
 <% end %>
 
 <% @ids["red_ids"].each do |red| %>
 	//$("#<%= red %>").children('u').effect("highlight", { color:"red" }, 10000);
-	$("#<%= red %>").children('u').css("background", "red");
-	$(".bar[name='<%= red %>']").css("background", "red");
+	$("#<%= red %>").children('u').css("background", "lightpink");
+	$(".bar[name='<%= red %>']").css("background", "lightpink");
 <% end %>
 
 <% @ids["green_ids"].each do |green| %>
 	//$("#<%= green %>").children('u').effect("highlight", { color:"green" }, 10000);
-	$("#<%= green %>").children('u').css("background", "green");
-	$(".bar[name='<%= green %>']").css("background", "green");
+	$("#<%= green %>").children('u').css("background", "aquamarine");
+	$(".bar[name='<%= green %>']").css("background", "aquamarine");
 <% end %>
 
 <% if @ids["red_ids"].none? && @ids["yellow_ids"].none? %>

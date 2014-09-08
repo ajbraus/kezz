@@ -34,25 +34,20 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-    <% end %>
+<% end %>
   </head>
   <body>
-      <div class='row'>
-        <div class="col-sm-3">
-          <%= render 'shared/sidebar' %>
-        </div>
-        <header><%= @headerTitle %></header>
-        <%= render partial: "shared/flash_message", flash: flash %> 
-        <div class="col-sm-8">
-          <%= yield %>
-          <footer>
-            <hr>
-            <br>
-            <br>
-            <p>&copy; The Kezz Academy 2014</p>
-            <br>
-          </footer>
-        </div>
+    <%= render "shared/header" %>
+    <%= render partial: "shared/flash_message", flash: flash %> 
+      <div class='container'>
+        <%= yield %>
+        <footer>
+          <hr>
+          <br>
+          <br>
+          <p>&copy; The Kezz Academy 2014</p>
+          <br>
+        </footer>
       </div>
     <!-- Javascripts
     ================================================== -->

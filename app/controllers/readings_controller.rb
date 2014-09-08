@@ -6,15 +6,15 @@ class ReadingsController < ApplicationController
     @reading = Reading.find(params[:id])
 
     @id_array = []
-      @reading.paragraphs.each do |p| 
-        @id_array.push(p.id)
-        p.sentences.each do |s| 
-          @id_array.push(s.id)
-          s.phrases.each do |ph|
-            @id_array.push(ph.id)
-          end
+    @reading.paragraphs.each do |p| 
+      @id_array.push(p.id)
+      p.sentences.each do |s| 
+        @id_array.push(s.id)
+        s.phrases.each do |ph|
+          @id_array.push(ph.id)
         end
       end
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,58 +45,17 @@ class ReadingsController < ApplicationController
   def create
     @library = Library.find(params[:library_id])
     @reading = @library.readings.build(params[:reading])
-    @paragraphs = @reading.content.split(/\n/) #split on new line
     if @reading.save
-      @paragraphs.each do |p| 
-        if p.length > 1
-          p.chomp
-          @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-          if @paragraph.save
-          else
-            respond_to do |format|
-              format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @paragraph.errors, status: :unprocessable_entity }
-            end
-          end
-          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
-          @sentences.each do |s|
-            @psentence = Paragraph.find(@paragraph.id)
-            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
-            if @sentence.save
-            else
-              respond_to do |format|
-                format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-                format.json { render json: @sentence.errors, status: :unprocessable_entity }
-              end
-            end
-            @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
-            @phrases.each do |ph|
-              while ph.start_with?(' ') do
-                ph = ph[1..-1]
-              end
-              #ph[0] = ph[0].downcase
-              ph.chomp
-              @sphrase = Sentence.find(@sentence.id)
-              @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
-              if @phrase.save
-              else
-                respond_to do |format|
-                  format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-                  format.json { render json: @phrase.errors, status: :unprocessable_entity }
-                end
-              end
-            end
-          end
+      if @reading.scramble
+        respond_to do |format| 
+          format.html { redirect_to @library, notice: 'Reading was successfully created.' }
+          format.json { render json: @reading, status: :created, location: @reading }
         end
-      end
-      respond_to do |format| 
-        format.html { redirect_to @library, notice: 'Reading was successfully created.' }
-        format.json { render json: @reading, status: :created, location: @reading }
-      end
-    else
-      respond_to do |format|
-        format.html { render action: "new", notice: 'There was an error. Reading not created.' }
-        format.json { render json: @reading.errors, status: :unprocessable_entity }
+      else
+        respond_to do |format|
+          format.html { render action: "new", notice: 'There was an error. Reading not created.' }
+          format.json { render json: @reading.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -109,57 +68,17 @@ class ReadingsController < ApplicationController
     @reading.paragraphs.each { |p| p.destroy }
 
     if @reading.update_attributes(params[:reading])
-      @paragraphs = @reading.content.split(/\n/) #split on new line
-      @paragraphs.each do |p| 
-        if p.length > 1
-          p.chomp
-          @paragraph = @reading.paragraphs.build(reading_id: @reading.id)
-          if @paragraph.save
-          else
-            respond_to do |format|
-              format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
-              format.json { render json: @paragraph.errors, status: :unprocessable_entity }
-            end
-          end
-          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
-          @sentences.each do |s|
-            @psentence = Paragraph.find(@paragraph.id)
-            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
-            if @sentence.save
-            else
-              respond_to do |format|
-                format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
-                format.json { render json: @sentence.errors, status: :unprocessable_entity }
-              end
-            end
-            @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
-            @phrases.each do |ph|
-              while ph.start_with?(' ') do
-                ph = ph[1..-1]
-              end
-              #ph[0] = ph[0].downcase
-              ph.chomp
-              @sphrase = Sentence.find(@sentence.id)
-              @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
-              if @phrase.save
-              else
-                respond_to do |format|
-                  format.html { render action: "edit", notice: 'There was an error. Reading not created.' }
-                  format.json { render json: @phrase.errors, status: :unprocessable_entity }
-                end
-              end
-            end
-          end
+      if @reading.scramble
+        respond_to do |format| 
+          format.html { redirect_to library_path(@library), notice: 'Reading was successfully created.' }
+          format.json { render json: @reading, status: :created, location: @reading }
+        end
+      else
+        respond_to do |format|
+          format.html { render action: "edit", notice: 'There was an error. Reading not updated.' }
+          format.json { render json: @reading.errors, status: :unprocessable_entity }
         end
       end
-
-      respond_to do |format| 
-        format.html { redirect_to library_path(@library), notice: 'Reading was successfully created.' }
-        format.json { render json: @reading, status: :created, location: @reading }
-      end
-    else
-      format.html { render action: "edit", notice: 'There was an error. Reading not updated.' }
-      format.json { render json: @reading.errors, status: :unprocessable_entity }
     end
   end
 
@@ -181,6 +100,9 @@ class ReadingsController < ApplicationController
     @relative_ids = params[:relative_ids] #e.g. { 1 => { 1 => [1,2,3], 2 => [3,4,5] }, 2 => { 1 => [6,7,8], 2 => [1] } }  
     @absolute_ids = params[:absolute_ids] #e.g. [1,1,1,2,3,2,4,5,2,1,6]
     
+    # @reading.check_relative_order(@relative_ids) #Orange IDs
+    # @reading.check_absolute_order(@absolute_ids) #Green IDS
+
     @relative_order = []
     @reading.paragraphs.each do |p|
       @relative_order.push(p.id)

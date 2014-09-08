@@ -23,6 +23,42 @@ class Reading < ActiveRecord::Base
 	  end
 	end
 
+  def scramble
+    @paragraphs = self.content.split(/\n/) #split on new line
+    @paragraphs.each do |p| 
+      if p.length > 1
+        p.chomp
+        @paragraph = self.paragraphs.build(reading_id: self.id)
+        if @paragraph.save
+          @sentences = p.split(/(?<=\. )|(?<=\? )|(?<=\! )|(?<=\" )/)
+          @sentences.each do |s|
+            @psentence = Paragraph.find(@paragraph.id)
+            @sentence = @psentence.sentences.build(paragraph_id: @psentence.id)
+            if @sentence.save
+              @phrases = s.split(/(?<=\, )|(?<=\; )|(?<=\- )|(?<=\: )/)
+              @phrases.each do |ph|
+                while ph.start_with?(' ') do
+                  ph = ph[1..-1]
+                end
+                #ph[0] = ph[0].downcase
+                ph.chomp
+                @sphrase = Sentence.find(@sentence.id)
+                @phrase = @sphrase.phrases.build(text: ph, sentence_id: @sphrase.id)
+                unless @phrase.save
+                  return nil #phrase not saved
+                end
+              end
+            else 
+              return nil #sentance not saved
+            end
+          end
+        else 
+          return nil #paragraph not saved
+        end
+      end
+    end
+  end
+
   # def shuffle_p_and_s(r)
   #   r.paragraphs.shuffle.each do |p|
   #     p.sentences.shuffle

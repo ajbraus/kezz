@@ -28,11 +28,11 @@ $(function() {
       //line = jQuery.parseHTML("<div>" + line + "</div>")
       //console.log(line)
       if (totalSyllables == 5) { //style lines with 5 or 7 syllables
-        line = "<span style='color:blue;'>" + line + "</span><br>"
+        line = "<span style='color:MediumVioletRed ;'>" + line + "</span><br>"
       } else if (totalSyllables == 7) {
-        line = "<span style='color:green;'>" + line + "</span><br>"
+        line = "<span style='color:deepskyblue;'>" + line + "</span><br>"
       } else if (totalSyllables == 10) {
-        line = "<span style='color:gold;'>" + line + "</span><br>"
+        line = "<span style='color:Orchid;'>" + line + "</span><br>"
       } else {
         line = "<span style='color:grey;'>" + line + "</span><br>"
       }

@@ -1,11 +1,93 @@
 <div class="row">
   <div class="col-sm-12">
-    <h1 class='text-center'> Welcome. </h1>
-    <div class='lead'>
-      The mission of the Kezz Academy is to offer reading and writing skills training online for free.
+    <h1 class='text-center'>The Kezz Mission</h1>
+    <div class='lead text-center'>
+      The mission of the Kezz Academy is to offer the best free online reading and writing educational experiences.
+    </div>
+    <div class='text-center text-muted'>Try out our first two games - Kezz Readings & Winged Words</div>
+    <br>
+    <hr>
+    <br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <h2 class='text-center'>Kezz Readings</h2>
+    <p class='text-muted small'>
+      A Kezz Reading is a puzzle of scrambled text from some of the best literature and scientifc writing - <b>Try unscrambling the beginning Charles Dickens' <u>Tale of Two Cities</u></b>
+    </p>
+
+    <div class="bar_graph col-sm-1pull-right">
+      <% @id_array.each do |id| %>
+        <div class="bar" name="<%= id %>"></div>
+      <% end %>
+    </div>
+    <br>
+    <div class="pSortable reading">
+      <% @reading.paragraphly? ? @paragraphs = @reading.paragraphs.shuffle : @paragraphs = @reading.paragraphs %>
+      <% @paragraphs.each do |p| %>
+        <p id="<%= p.id %>" class="sSortable getId paragraph"><u class="phandle">&#182;</u>
+        <% @reading.sentencely? ? @sentences = p.sentences.shuffle : @sentences = p.sentences %>
+        <% @sentences.each do |s| %>
+          <span id="<%= s.id %>" class="phSortable getId sentence"><u class="shandle">&#167;</u>
+          <% @reading.phrasely? ? @phrases = s.phrases.shuffle : @phrases = s.phrases %>
+          <% @phrases.each do |ph| %>
+            <span id="<%= ph.id %>" class="getId phrase">
+              <u class="phhandle">&#186;</u>
+              <span class="phrase"><%= ph.text %></span>
+            </span>
+          <% end %>
+          </span>
+        <% end %>
+        </p>
+      <% end %>
+    </div>
+    <div class="pull-right btn-default check_order btn-sm btn" title="<%= @reading.id %>">Check Order</div>
+  </div>
+  <div class="col-lg-6">
+    <h2 class='text-center'>Winged Words - Haiku</h2>
+    <p class='text-muted small'>
+      Winged Words makes it easy and fun to write great poetry and share it. It's the "Instagram of Poetry" - <b>Try writing a haiku</b> (a hiuku has 3 lines: red, blue, red)
+    </p>
+    <p>
+      <%= render 'poems/form' %>
+    </p>
+  </div>
+</div>
+<br>
+<hr>
+<br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1 class='text-center'>We Need You To Share</h1>
+    <div class='lead text-center'>
+      Sign up for our launch and spread the word about Kezz Academy. We are trying to get 5,000 sign ups before we go live. 
+      <br>
+      <br>
+      <div class="btn btn-lg btn-info">Sign up for Launch</div>
     </div>
   </div>
 </div>
+<br>
+<hr>
+<br>
+<div class="row">
+  <h1 class='text-center'>Core Values</h1>
+  <br>
+  <div class="col-sm-4">
+    <h4 class='text-center'>Create Heuristic Learning Experiences</h4>
+    <dd>At the Kezz Academy we try to create experiences that instill an <b>educated 'gut feeling'</b> for the knowledge you've learned not just memorized facts - it's called "heuristic education".</dd>
+  </div>
+  <div class="col-sm-4">
+    <h4 class='text-center'>Above All Else Motivate Students</h4>
+    <dd>We want to create experiences that engage everyone and motivate them to participate. The experiences we create are tactile, challenging, remarkable, and fun.</dd>
+  </div>
+  <div class="col-sm-4">
+    <h4 class='text-center'>Everything Free and Automatic</h4>
+    <dd><b>Power to the teachers.</b> We want to make their jobs as easy and automatic as possible so they can focus on coaching and growing students.</dd>
+  </div>
+</div>
+<% if false %>
 <br>
 <hr>
 <br>
@@ -27,24 +109,5 @@
     <dd>Where you can work together with everyone on the internet on one giant collaborative story.</dd>
   </div>
 </div>
-<br>
-<hr>
-<br>
-<div class="row">
-  <h1 class='text-center'>Core Values</h1>
-  <br>
-  <div class="col-sm-4">
-    <h4 class='text-center'>Above All Else MOTIVATE Students</h4>
-    <dd>
-      We want to create experiences that engage everyone, are tactile, challenging, remarkable, and fun. 
-    </dd>
-  </div>
-  <div class="col-sm-4">
-    <h4 class='text-center'>Create Heuristic Learning Experiences</h4>
-    <dd>We're not so interested in technology that can help you memorize things. At the Kezz Academy we try to create experiences that instill a 'gut feeling' for the knowledge you've learned.</dd>
-  </div>
-  <div class="col-sm-4">
-    <h4 class='text-center'>Everything Free and Automatic</h4>
-    <dd>Power to the teachers who are shoulder to shoulder and face to face with students. We want to make their jobs as easy and automatic as possible so they can focus on growing students.</dd>
-  </div>
-</div>
+
+<% end %>

@@ -6,24 +6,21 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   # attr_accessible :title, :body
 
   has_many :libraries
   has_many :poems
 
-  validates :name, presence: true
+  validates :first_name, presence: true
 
-  def first_name
-    name.split(' ')[0]
+  before_create :set_password
+
+  def set_password
+    self.password = Devise.friendly_token.first(8)
   end
 
-  def last_name
-    name.split.count == 3 ? name.split(' ')[2] : name.split(' ')[1]
+  def full_name
+    first_name + " " + last_name
   end
-
-  def middle_name
-    name.split.count == 3 ? name.split(' ')[1] : nil
-  end
-
 end

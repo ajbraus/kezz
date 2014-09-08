@@ -4,6 +4,13 @@
   </div>
   <ul class="nav navbar-nav" role="navigation">
     <li>
+      <%= link_to "Contact", "mailto:ajbraus@gmail.com?subject=Please Send Me More Information About Kezz" %>
+    </li>
+    <li>
+      <%= link_to('Sign up for Launch', new_user_registration_path)  %>
+    </li>
+    <% if false %>
+    <li>
       <%= link_to "Kezz Readings", libraries_path %>
     </li>
     <li>
@@ -12,6 +19,7 @@
     <li>
       <a href="#">The Finnegan Project</a>
     </li>
+    
     <% if !user_signed_in? %>
       <li>
       <%= link_to('Login', new_user_session_path)  %>  
@@ -40,6 +48,7 @@
           </li>
         </ul>
       </li>
+    <% end %>
     <% end %>
   </ul>
 </nav>

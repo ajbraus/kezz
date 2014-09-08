@@ -1,29 +1,35 @@
-<%= form_for(@poem) do |f| %>
-<div class="col-sm-6">
-  <% if @poem.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this poem from being saved:</h2>
+<%= form_for @poem, class:"row" do |f| %>
+<div class="row">
+  <div class="col-sm-6">
+    <% if @poem.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@poem.errors.count, "error") %> prohibited this poem from being saved:</h2>
 
-      <ul>
-      <% @poem.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @poem.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <%= f.text_field :title, class:"text-input", id:"title", placeholder: "Title" %><br>
+    <%= f.text_area :body, id:"poem", class:"lined", autofocus: true %>
+  </div>
+  <div class="col-sm-6">
+    <h5 id="poemTitle" class="poem-title">
+      Untitled
+    </h5>
+    <div id="poemText" class="poem-text">
     </div>
-  <% end %>
-  
-  <%= f.text_field :title, class:"text-input", id:"title", placeholder: "Title" %><br>
-  <%= f.text_area :body, id:"poem", class:"lined", autofocus: true %>
-</div>
-<div class="col-sm-6">
-  <h3 id="poemTitle" class="poem-title">
-    Untitled
-  </h3>
-  <div id="poemText" class="poem-text">
   </div>
 </div>
-<section>
-  <%= f.submit "Save Poem", class:"btn btn-lg btn-success pull-right" %> 
-  <%= f.submit "Save & Publish", class:"btn btn-lg btn-primary pull-right breathing-room" %>
-</section>
+<% if false %>
+<div class="row">
+  <section>
+    <%= f.submit "Save Poem", class:"btn btn-sm btn-success pull-right" %> 
+    <%= f.submit "Save & Publish", class:"btn btn-sm btn-primary pull-right breathing-room" %>
+  </section>
+</div>
+<% end %>
 <% end %>
